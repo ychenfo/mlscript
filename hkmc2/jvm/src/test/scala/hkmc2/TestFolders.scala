@@ -76,6 +76,7 @@ object TestFolders:
     val (deforest, flowBasedMono) = variant match
       case "flowopt-dnone" => (true, N)
       case "flowopt-dopt" => (true, S(true))
+      case "flowopt-dpopt" => (true, S(false))
       case "flowopt-none" => (false, N)
       case "flowopt-opt" => (false, S(true))
       case "flowopt-popt" => (false, S(false))
@@ -113,7 +114,7 @@ object TestFolders:
     diffTestDir(wd)/"slop"
 
   // the flow-opt variants, each a directory of the same name under `mlscript/` and `mlscript-compile/`
-  val flowVariants: Ls[Str] = "flowopt-dnone" :: "flowopt-dopt" :: "flowopt-none" :: "flowopt-opt" :: "flowopt-popt" :: Nil
+  val flowVariants: Ls[Str] = "flowopt-dnone" :: "flowopt-dopt" :: "flowopt-dpopt" :: "flowopt-none" :: "flowopt-opt" :: "flowopt-popt" :: Nil
 
   /** Diff test subdirectory of one flow-opt variant, for its hkmc2Flow*Tests project. */
   def flowDiffDir(wd: os.Path, variant: Str): os.Path =

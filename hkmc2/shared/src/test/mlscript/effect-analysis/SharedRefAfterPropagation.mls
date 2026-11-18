@@ -1,0 +1,22 @@
+:js
+
+#config(liftDefns: Some(LiftDefns), aggressive: true, flowBasedOpt: Some(FlowBasedOpt(mono: false)))
+
+open annotations { noInline }
+
+
+// * the simplifier propagates the partial application `f(x)` bound to `h` into both calls of `h`, and used to
+// * insert the same IR node at both sites; the flow analysis keys sites by node identity, so poly mode gave
+// * them one specialized copy, whose dead-parameter elimination came from the discarded `h(1)`, and `use`
+// * then received `[undefined, undefined]`
+:noSanityCheck
+:expect 12
+@noInline fun f(a)(b) = [a, b]
+fun use(p) = if p is [a, b] then a + b
+@noInline fun g(x) =
+  let h = f(x)
+  h(1)
+  use(h(2))
+g(10)
+//│ = 12
+

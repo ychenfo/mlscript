@@ -193,7 +193,7 @@ input[type="number"], input[type="text"] {
       <option value="single">one baseline, all variants</option>
       <option value="groups">groups, each with its own baseline</option>
     </select></label>
-    <label id="figGroupsLabel" class="hidden">groups <input id="figGroups" type="text" style="width:240px" placeholder="none, opt, popt | dnone, dopt" title="variants drawn side by side in every panel; groups are separated by |, and the first variant of a group is its baseline (= 1)"></label>
+    <label id="figGroupsLabel" class="hidden">groups <input id="figGroups" type="text" style="width:240px" placeholder="none, opt, popt | dnone, dopt, dpopt" title="variants drawn side by side in every panel; groups are separated by |, and the first variant of a group is its baseline (= 1)"></label>
     <label class="only-figure">columns <input id="figCols" type="number" min="1" max="30" step="1" value="6" style="width:56px"></label>
     <label class="only-figure">panel w <input id="figW" type="number" min="40" max="600" step="10" value="120" style="width:64px"></label>
     <label class="only-figure">panel h <input id="figH" type="number" min="40" max="600" step="10" value="110" style="width:64px"></label>
@@ -334,8 +334,8 @@ function loadAll(files) {
   state.sx = available.includes("gz_bytes") ? "gz_bytes" : available[0]
   state.sy = available.includes("lat_avg_ns") ? "lat_avg_ns" : available[available.length - 1]
   state.order = [...variants]
-  state.figGroups = ["none", "opt", "popt", "dnone", "dopt"].every(v => variants.includes(v)) ? "none, opt, popt | dnone, dopt" : variants.join(", ")
-  const preferred = ["dnone/none", "dopt/dnone", "opt/none", "popt/none", "popt/opt", "dopt/none"].filter(t => t.split("/").every(v => variants.includes(v)))
+  state.figGroups = ["none", "opt", "popt", "dnone", "dopt", "dpopt"].every(v => variants.includes(v)) ? "none, opt, popt | dnone, dopt, dpopt" : variants.join(", ")
+  const preferred = ["dnone/none", "dopt/dnone", "dpopt/dnone", "dpopt/dopt", "opt/none", "popt/none", "popt/opt", "dopt/none"].filter(t => t.split("/").every(v => variants.includes(v)))
   state.presetPairs = (preferred.length ? preferred : variants.slice(1).map(v => `${v}/${variants[0]}`)).join(", ")
   state.hiddenVariants.clear(); state.hiddenPrograms.clear()
   buildControls()

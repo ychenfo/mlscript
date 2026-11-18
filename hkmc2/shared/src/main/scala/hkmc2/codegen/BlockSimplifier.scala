@@ -1257,7 +1257,8 @@ class BlockSimplifier
         assignedPureCallPrefix(loc) match
         case S(call) =>
           registerChange(s"${loc.showDbg} ~> ${call.showDbg}")
-          super.applyResult(call)(k)
+          // the assignment of `call` stays, so this use gets a copy (see `FreshResultNodes`)
+          super.applyResult(FreshResultNodes.copy(call))(k)
         case N =>
           super.applyResult(r)(k)
       
@@ -1273,7 +1274,8 @@ class BlockSimplifier
               prefix.metadata.annotations ++ c.metadata.annotations,
             ),
             c.toLoc)
-          super.applyResult(combined)(k)
+          // `prefix` stays assigned, so the combined call gets its own copy of the prefix's nodes
+          super.applyResult(FreshResultNodes.copy(combined))(k)
         case N => super.applyResult(r)(k)
       
       // * Remove uses of the strange builtin comma operator
@@ -1870,7 +1872,7 @@ class BlockSimplifier
       class Copier(resSym: LocalVarSymbol, existingMapping: Map[Symbol, Symbol], thisMapping: Map[InnerSymbol, Path])(using State):
         val lblSym = LabelSymbol(N, "inlinedLbl")
         
-        object Copier extends SymbolRefresher(existingMapping):
+        object Copier extends SymbolRefresher(existingMapping), FreshResultNodes:
           var currentlyNested = false
           
           override def applyFunBodyLikeBlock(b: Block): Block =
@@ -1886,27 +1888,12 @@ class BlockSimplifier
                 Assign(resSym, r2, Break(lblSym))
             case _ => super.applyBlock(b)
         
-          // the flow analysis tells sites apart by the identity of their result nodes, so every inlined copy
-          // gets its own nodes, also where it refreshes no symbol: a fresh leaf makes the transformer rebuild
-          // every node above it, and `applyResult` below covers the results without leaves
           override def applyValue(v: Value)(k: Value => Block): Block = v match
             case Value.This(sym: InnerSymbol) if thisMapping.contains(sym) =>
               thisMapping(sym) match
               case v2: Value => k(v2)
               case _ => super.applyValue(v)(k)
-            case _ => super.applyValue(v): v2 =>
-              k(if v2 isnt v then v2 else v match
-                case v: Value.SimpleRef => v.copy()(v.toLoc)
-                case v: Value.MemberRef => v.copy()(v.toLoc)
-                case v: Value.This => v.copy()(v.toLoc)
-                case v: Value.Lit => v.copy()(v.toLoc))
-          
-          override def applyResult(r: Result)(k: Result => Block): Block =
-            super.applyResult(r): r2 =>
-              k(if r2 isnt r then r2 else r match
-                case t: Tuple => t.copy()(t.toLoc)
-                case rc: Record => rc.copy()(rc.toLoc)
-                case _ => r2)
+            case _ => super.applyValue(v)(k)
 
           override def applyPath(p: Path)(k: Path => Block): Block = p match
             case Value.This(sym: InnerSymbol) if thisMapping.contains(sym) =>

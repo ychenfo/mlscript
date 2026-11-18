@@ -370,6 +370,37 @@ class BlockTransformer(subst: SymbolSubst):
 
 
 
+// the flow analysis tells program points apart by the identity of their result nodes, so a pass that puts a copy
+// of existing code at another program point must give it its own nodes, also where it changes nothing in them:
+// a fresh leaf makes the transformer rebuild every node above it, and `applyResult` covers the results without leaves
+trait FreshResultNodes extends BlockTransformer:
+  override def applyValue(v: Value)(k: Value => Block): Block =
+    super.applyValue(v): v2 =>
+      k(if v2 isnt v then v2 else v match
+        case v: Value.SimpleRef => v.copy()(v.toLoc)
+        case v: Value.MemberRef => v.copy()(v.toLoc)
+        case v: Value.This => v.copy()(v.toLoc)
+        case v: Value.Lit => v.copy()(v.toLoc))
+  
+  override def applyResult(r: Result)(k: Result => Block): Block =
+    super.applyResult(r): r2 =>
+      k(if r2 isnt r then r2 else r match
+        case t: Tuple => t.copy()(t.toLoc)
+        case rc: Record => rc.copy()(rc.toLoc)
+        case _ => r2)
+
+object FreshResultNodes:
+  private object Copier extends BlockTransformer(SymbolSubst.Id), FreshResultNodes
+  /** A copy of `r` that shares no result node with it; `r` must not bind symbols (no lambda in it). */
+  def copy(r: Result): Result =
+    var copied: Opt[Result] = N
+    Copier.applyResult(r): r2 =>
+      copied = S(r2)
+      End()
+    copied.getOrElse(lastWords(s"no copy of ${r}"))
+
+
+
 class BlockTransformerShallow(subst: SymbolSubst) extends BlockTransformer(subst):
   override def applyLam(lam: Lambda) = lam
   // Note: no need to override things like applyFunDefn, as they are only called by applyDefn
