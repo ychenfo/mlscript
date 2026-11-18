@@ -1,0 +1,62 @@
+#lang(0.3.x)
+
+import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+open Predef
+open annotations { pure, noInline }
+
+module NofibPrelude with ...
+
+// the part of nofib/NofibPrelude.mls that plays the role of a runtime for the benchmark programs:
+// the shared data types, Math wrappers, and conversions between JS strings and lists;
+// the list functions are copied into each program, where the analysis can see and specialize them
+// changes from the original: no laziness, no `extends`/abstract classes, no type parameters, and no type annotations
+// except `: Str` where a public function calls string methods on its parameter (the resolver requires it)
+// everything that is not a data type is `@pure`: an importing program does not analyze these bodies, so a call that
+// is not inlined relies on the annotation; an inlined Math wrapper or operator is recognized as pure by the analysis
+// `@noInline` on the string-method ones: inlining runs before the flow analysis and would drop their `@pure`,
+// and an inlined `nofibStringToList` would call its lifted `go`, which this unit does not export
+
+data class Some(x)
+object None
+
+data class (::) Cons(head, tail) with
+  fun toString() =
+    "[" + _internal_cons_to_str(Cons(head, tail)) + "]"
+object Nil with
+  fun toString() = "[]"
+fun _internal_cons_to_str(ls) = if ls is
+  Nil then ""
+  h :: Nil then render(h)
+  h :: t then render(h) + "," + _internal_cons_to_str(t)
+
+@pure fun power(a, n) = globalThis.Math.pow(a, n)
+
+@pure fun intDiv(a, b) = globalThis.Math.floor(a / b)
+@pure fun intQuot(a, b) = globalThis.Math.trunc(a / b)
+
+@pure fun intMod(a, b) = a - (b * intDiv(a, b))
+@pure fun intRem(a, b) = a - (b * intQuot(a, b))
+
+@pure fun max(a, b) = globalThis.Math.max(a, b)
+@pure fun min(a, b) = globalThis.Math.min(a, b)
+
+@pure fun abs(x) = globalThis.Math.abs(x)
+
+@pure fun stringOfFloat(x) = x + ""
+@pure fun stringOfInt(x) = x + ""
+@pure fun stringConcat(x, y) = x + y
+@pure fun stringListConcat(ls) = if ls is
+  Nil then ""
+  h :: t then stringConcat(h, stringListConcat(t))
+@pure fun sqrt(x) = globalThis.Math.sqrt(x)
+@pure fun tan(x) = globalThis.Math.tan(x)
+@pure fun sin(x) = globalThis.Math.sin(x)
+@pure fun cos(x) = globalThis.Math.cos(x)
+@pure fun round(x) = globalThis.Math.round(x)
+@pure @noInline fun int_of_char(x: Str) = x.charCodeAt(0)
+@pure @noInline fun nofibStringToList(s: Str) =
+  fun go(i) = if i < s.length then s.charAt(i) :: go(i + 1) else Nil
+  go(0)
+@pure fun nofibListToString(ls) = if ls is
+  Nil then ""
+  h :: t then h + nofibListToString(t)

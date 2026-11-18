@@ -102,6 +102,7 @@ object FlowAnalysis:
   // * FIXME: not all symbols have irDefn; add and look up an irHeader instead
   private[codegen] def isPureCall(call: Call, whichArgList: Int): Bool = call.fun match
     case Value.SimpleRef(b: BuiltinSymbol) => whichArgList == 0 && b.isPure
+    case PureGlobalFunction() => whichArgList == 0
     case p => p.targetSymbol.exists:
       case s: TermSymbol => s.irFunDefn match
         case S(fun) => whichArgList < fun.params.size && fun.annotations.exists(_.isInstanceOf[Annot.Pure])
@@ -223,6 +224,19 @@ object FunRef:
     case MemberRefTo(tSym: TermSymbol, qual)
       if (tSym.k is syntax.Fun) && tSym.owner.forall(_.asMod.isDefined) => S(tSym -> qual)
     case _ => N
+
+// `globalThis.Math.f` for an `f` whose result depends only on its arguments, treated like a pure builtin operator:
+// like those, it assumes that `globalThis.Math` is not reassigned and that coercing the arguments has no effect
+object PureGlobalFunction:
+  private val pureMathFunctions = Set(
+    "abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil", "clz32", "cos", "cosh",
+    "exp", "expm1", "floor", "fround", "hypot", "imul", "log", "log10", "log1p", "log2", "max", "min", "pow",
+    "round", "sign", "sin", "sinh", "sqrt", "tan", "tanh", "trunc")
+  def unapply(p: Path): Bool = p match
+    // the `globalThis` symbol belongs to the state of the unit that elaborated the reference, not necessarily ours
+    case Select(Select(Value.This(g: TopLevelSymbol), Tree.Ident("Math")), Tree.Ident(name)) =>
+      (g eq g.getState.globalThisSymbol) && pureMathFunctions(name)
+    case _ => false
 
 
 sealed trait ProdStrat
@@ -1325,6 +1339,9 @@ class FlowConstraintsCollector(
           UnknownProd
         case p: Path =>
           p match
+          // like a builtin operator: reading it is pure, and it is an unknown function, which uses its arguments,
+          // but whose calls `isPureCall` keeps from having an effect
+          case PureGlobalFunction() => UnknownProd
           case refSite @ FunRef(f, selectedFrom) =>
             // ? [todo:harry-0]
             // ? It's a special case for module getters but I'm not sure if

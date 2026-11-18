@@ -199,6 +199,61 @@ addCommandAlias("fcdnone", "hkmc2FlowDnoneTests/testOnly hkmc2.FlowDnoneCompileT
 addCommandAlias("fcdopt", "hkmc2FlowDoptTests/testOnly hkmc2.FlowDoptCompileTestRunner -- -z")
 addCommandAlias("fcnone", "hkmc2FlowNoneTests/testOnly hkmc2.FlowNoneCompileTestRunner -- -z")
 addCommandAlias("fcopt", "hkmc2FlowOptTests/testOnly hkmc2.FlowOptCompileTestRunner -- -z")
+// `fcs <variants> <filter>...` and `fds <variants> <filter>...` run the `fc<variant>`/`fd<variant>` aliases above for
+// `all` variants or a comma-separated subset of them, with each filter as a `-z` substring (eg `nofib/ansi`, `eff`, `fft`)
+// they run one variant at a time with a gc and a pause in between, as running them back to back can exhaust sbt's heap;
+// a failure skips the queued commands up to the next `FailureWall`, so one after each variant lets the next ones run
+val flowVariants = Seq("dnone", "dopt", "none", "opt")
+val flowRunCurrent = AttributeKey[String]("flowRunCurrent")
+val flowRunFailures = AttributeKey[Seq[String]]("flowRunFailures")
+val flowRunSavedOnFailure = AttributeKey[Option[Exec]]("flowRunSavedOnFailure")
+val flowRunOnFailure = Some(Exec("flowRunFailed", None))
+def flowRunCommand(name: String, aliasPrefix: String) = Command.args(name, "<all|variant,...> <filter>...") { (state, args) =>
+  args match {
+    case Seq(vs, filters @ _*) if filters.nonEmpty =>
+      val variants = if (vs == "all") flowVariants else vs.split(",").toSeq
+      val unknown = variants.filterNot(flowVariants.contains)
+      if (unknown.nonEmpty) {
+        state.log.error(s"unknown variants: ${unknown.mkString(", ")}; expected `all` or some of ${flowVariants.mkString(",")}")
+        state.fail
+      } else {
+        val steps = variants.toList.flatMap { v =>
+          List(s"flowRunStart $v", s"$aliasPrefix$v ${filters.mkString(" -z ")}", BasicCommandStrings.FailureWall, "flowRunGc")
+        }
+        (steps :+ "flowRunEnd") ::: state.copy(onFailure = flowRunOnFailure)
+          .put(flowRunSavedOnFailure, state.onFailure).put(flowRunFailures, Nil)
+      }
+    case _ =>
+      state.log.error(s"usage: $name <all|variant,...> <filter>...")
+      state.fail
+  }
+}
+commands ++= Seq(
+  flowRunCommand("fcs", "fc"),
+  flowRunCommand("fds", "fd"),
+  Command.single("flowRunStart")((state, v) => state.put(flowRunCurrent, v)),
+  // sbt clears `onFailure` once it has used it, so this re-arms it for the remaining variants
+  Command.command("flowRunFailed") { state =>
+    val failed = state.get(flowRunCurrent).getOrElse("?")
+    state.log.error(s"variant $failed failed, continuing with the next one")
+    state.copy(onFailure = flowRunOnFailure).update(flowRunFailures)(_.getOrElse(Nil) :+ failed)
+  },
+  Command.command("flowRunGc") { state =>
+    System.gc()
+    Thread.sleep(3000)
+    state
+  },
+  Command.command("flowRunEnd") { state =>
+    val failures = state.get(flowRunFailures).getOrElse(Nil)
+    val restored = state.copy(onFailure = state.get(flowRunSavedOnFailure).flatten)
+      .remove(flowRunCurrent).remove(flowRunFailures).remove(flowRunSavedOnFailure)
+    if (failures.isEmpty) restored
+    else {
+      restored.log.error(s"failed variants: ${failures.mkString(", ")}")
+      restored.fail
+    }
+  },
+)
 // Aggregate tests (for validation)
 addCommandAlias("qtest", "hkmc2MainTests/test") // a quick check running only the main compilation and diff- tests
 addCommandAlias("mtest", "hkmc2MostTests/test") //  ignores JS compilation + diff- tests; usually sufficient

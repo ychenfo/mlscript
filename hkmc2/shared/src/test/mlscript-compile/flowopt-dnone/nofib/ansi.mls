@@ -1,0 +1,130 @@
+#lang(0.3.x)
+
+import "./NofibPrelude.mls"
+open NofibPrelude
+
+// port changes from nofib/ansi.mls: self-contained except for the shared NofibPrelude (the list functions it
+// used are copied in); no type annotations
+
+module ansi with ...
+
+// list functions copied from NofibPrelude
+
+private fun compose(f, g) = x => f(g(x))
+
+private fun tail(l) = if l is h :: t then t
+
+private fun reverse(l) =
+  fun r(l', l) = if l is x :: xs then r(x :: l', xs) else l'
+  r(Nil, l)
+
+private fun listLen(ls) =
+  fun l(ls, a) = if ls is
+    Nil then a
+    h :: t then l(t, a + 1)
+  l(ls, 0)
+
+private fun (+:) append(xs, ys) = if xs is
+  Nil then ys
+  x :: xs then x :: append(xs, ys)
+
+private fun concat(ls) = if ls is
+  Nil then Nil
+  x :: xs then append(x, concat(xs))
+
+private fun foldr(f, z, xs) = if xs is
+  Nil then z
+  h :: t then f(h, foldr(f, z, t))
+
+private fun replicate(n, x) = if n == 0 then Nil else x :: replicate(n - 1, x)
+
+
+
+val cls = nofibStringToList("L")
+//│ cls = ["L"]
+
+private fun goto(x, y) = "E" :: "[" :: (nofibStringToList(stringOfInt(y)) +: (";" :: nofibStringToList(stringOfInt(x)) +: nofibStringToList("H")))
+
+private fun at(x_y, s) = if x_y is [x, y] then goto(x, y) +: s
+
+private fun highlight(s) = nofibStringToList("ESC[7m") +: s +: nofibStringToList("ESC[0m")
+
+private fun end(xs) = nofibStringToList("")
+
+private fun readChar(eof, consume, cs) = if cs is
+  Nil then eof(Nil)
+  c :: cs then consume(c, cs)
+
+private fun peekChar(eof, consume, cs) = if cs is
+  Nil then eof(Nil)
+  c :: cs then consume(c, c :: cs)
+
+private fun pressAnyKey(prog, x) = readChar(prog, (c, x) => prog(x), x)
+
+private fun unreadChar(c, prog, cs) = prog(c :: cs)
+
+private fun writeChar(c, prog, cs) = c :: prog(cs)
+
+private fun writeString(s, prog, cs) = s +: prog(cs)
+
+private fun writes(ss, a, b) = writeString(concat(ss), a, b)
+
+private fun ringBell(prog, cs) = writeChar("B", prog, cs)
+
+private fun clearScreen(a, b) = writeString(cls, a, b)
+
+private fun writeAt(x_y, s, a) = if x_y is [x, y] then p => writeString(goto(x, y) +: s, a, p)
+
+private fun moveTo(x_y, a) = if x_y is [x, y] then p => writeString(goto(x, y), a, p)
+
+private fun returnn(s, consume) = consume(reverse(s))
+
+//│ ————————————————————————————————————————————————————————————————————————————————
+private fun deletee(n, s, l, consume, d) = if n > 0 then writeString(nofibStringToList("BS_BS"), loop(n - 1, tail(s), l, consume), d) else ringBell(loop(0, nofibStringToList(""), l, consume), d)
+
+private fun loop(n, s, l, consume) = x => readChar of
+  returnn(s, consume)
+  (c, d) => if
+            c == "B" then deletee(n, s, l, consume, d) 
+            c == "D" then deletee(n, s, l, consume, d)
+            c == "`" then returnn(s, consume)(d)
+            n < l then writeChar(c, loop(n + 1, c :: s, l, consume), d)
+            else ringBell(loop(n, s, l, consume), d)
+  x
+//│ ————————————————————————————————————————————————————————————————————————————————
+
+private fun readAt(x_y, l, consume) = writeAt(x_y, replicate(l, "_"), moveTo(x_y, loop(0, "", l, consume)))
+
+private fun promptReadAt(x_y, l, prompt, consume) = if x_y is [x, y] then
+  writeAt([x, y], prompt, readAt([x + listLen(prompt), y], l, consume))
+
+private fun program(input) = writes(
+  cls ::
+  at([17, 5], highlight(nofibStringToList("Demonstration program"))) ::
+  at([48, 5], nofibStringToList("Version 1.0")) ::
+  at([17, 7], nofibStringToList("This program illustrates a simple approach")) ::
+  at([17, 8], nofibStringToList("to screen-based interactive programs using")) ::
+  at([17, 9], nofibStringToList("the Hugs functional programming system.")) ::
+  at([17, 11], nofibStringToList("Please press any key to continue ...")) ::
+  Nil,
+  x => pressAnyKey(promptReadAt(
+    [17, 15],
+    18,
+    nofibStringToList("Please enter your name: "),
+    (name) =>
+      let reply = nofibStringToList("Hello ") +: name +: nofibStringToList("!")
+      writeAt(
+        [40 - (listLen(reply) / 2), 18],
+        reply,
+        moveTo(
+          [1, 23],
+          y => writeString(nofibStringToList("I'm waiting..."), x => pressAnyKey(end, x), y)
+        )
+      )
+  ), x),
+  input
+)
+
+private fun testAnsi_nofib(n) = foldr(compose, (x) => x, replicate(n, program))(nofibStringToList("testtesttest"))
+
+fun main() = nofibListToString(testAnsi_nofib(1))

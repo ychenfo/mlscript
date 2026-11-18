@@ -42,10 +42,22 @@ const groups = ["eff", "nofib"]
 const sourceFile = (v, prog) => join(compileDir, `flowopt-${v}`, prog + ".mjs")
 const terseFile = (v, prog, mode) => join(compileDir, `flowopt-${v}`, `${prog}.terse.${mode}.mjs`)
 const isTerseOutput = f => f.includes(".terse.")
+// modules imported by the programs, without a `main` of their own
+const libraries = ["NofibPrelude.mjs"]
 // a group directory is only created when its sources were compiled, so a missing one has no programs
 const programsOf = v => groups.flatMap(group => (existsSync(join(compileDir, `flowopt-${v}`, group))
     ? readdirSync(join(compileDir, `flowopt-${v}`, group)) : [])
-  .filter(f => f.endsWith(".mjs") && !isTerseOutput(f)).map(f => `${group}/${f.slice(0, -4)}`))
+  .filter(f => f.endsWith(".mjs") && !isTerseOutput(f) && !libraries.includes(f)).map(f => `${group}/${f.slice(0, -4)}`))
+
+// programs whose `main` takes the contents of input files (the original nofib programs read them from files or stdin);
+// the files are read once, before timing
+const inputDir = join(dirname(fileURLToPath(import.meta.url)), "../hkmc2/shared/src/test/mlscript/nofib/input")
+const inputFiles = {
+  "nofib/rsa": ["rsa.faststdin"],
+  "nofib/sorting": ["Main.hs"],
+  "nofib/treejoin": ["1500.1", "1500.2"],
+}
+const mainArgsOf = prog => (inputFiles[prog] ?? []).map(f => readFileSync(join(inputDir, f), "utf8"))
 
 // `--only` tokens: `group/name` is one program, `group` is every program of that group, `name` is that program in any group
 const selected = prog => {
@@ -110,14 +122,15 @@ const entriesOf = async prog => {
 for (const prog of programs) {
   if (sizes) { await printSizes(prog); continue }
 
+  const mainArgs = mainArgsOf(prog)
   const mods = []
   for (const { label, file } of await entriesOf(prog)) {
     const mod = (await import(pathToFileURL(file))).default
-    mod.main() // probe call: a broken entry fails before any of the program's variants is timed
+    mod.main(...mainArgs) // probe call: a broken entry fails before any of the program's variants is timed
     mods.push({ label, mod })
   }
   const bench = new Bench(benchOptions)
-  for (const { label, mod } of mods) bench.add(`${prog} [${label}]`, () => { mod.main() })
+  for (const { label, mod } of mods) bench.add(`${prog} [${label}]`, () => { mod.main(...mainArgs) })
   console.log(`\n== ${prog} (${benchDescription})`)
   await bench.run()
   console.table(bench.table())

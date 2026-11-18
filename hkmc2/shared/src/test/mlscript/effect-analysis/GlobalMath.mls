@@ -1,0 +1,44 @@
+:.
+:js
+
+#config(liftDefns: Some(LiftDefns), flowBasedOpt: Some(FlowBasedOpt(logEffects: true, mono: true)))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+
+
+// * calls of a whitelisted `globalThis.Math` function are pure, like builtin operators
+:sir
+fun floor(x) = globalThis.Math.floor(x)
+fun useFloor(x) = floor(x / 2) + globalThis.Math.pow(x, 2)
+//│ ———————————————| Lowered IR |———————————————————————————————————————————————————————————————————————
+//│ define floor⁰ as fun floor¹(x) {
+//│   return globalThis⁰.Math﹖.floor﹖(x)
+//│ };
+//│ define useFloor⁰ as fun useFloor¹(x) {
+//│   let tmp, tmp1, tmp2;
+//│   set tmp = /⁰(x, 2);
+//│   set tmp1 = floor¹(tmp);
+//│   set tmp2 = globalThis⁰.Math﹖.pow﹖(x, 2);
+//│   return +⁰(tmp1, tmp2)
+//│ };
+//│ end
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function floor¹#0 @ <root> -> Pure
+//│ flow-analysis > function useFloor¹#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call /⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call floor@result²#0 @ <root> -> Pure
+//│ flow-analysis > call floor@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call pow@result¹#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+
+// * `Math.random` is not on the whitelist
+fun rnd() = globalThis.Math.random()
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function rnd⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call random@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+
+
