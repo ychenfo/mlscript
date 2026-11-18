@@ -1,0 +1,7 @@
+:.
+:js
+
+import "../../../mlscript-compile/flowopt-opt/nofib/cryptarithm1.mls"
+cryptarithm1.main()
+//│ = [[[1,6,2,3,5,0,4]]]
+
