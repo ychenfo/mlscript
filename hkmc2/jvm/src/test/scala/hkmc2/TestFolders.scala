@@ -86,8 +86,8 @@ object TestFolders:
         flowBasedOpt = flowBasedMono.map: mono =>
           Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
             mono = mono,
-            // debugEta = false, debugDpe = false, debugDce = false, debugDead = false)))
-            debugEta = true, debugDpe = true, debugDce = true, debugDead = true))
+            debugEta = false, debugDpe = false, debugDce = false, debugDead = false))
+            // debugEta = true, debugDpe = true, debugDce = true, debugDead = true))
       )
 
   // a fresh context for the compile tests of one flow-opt variant, whose root configuration is `flowConfig`

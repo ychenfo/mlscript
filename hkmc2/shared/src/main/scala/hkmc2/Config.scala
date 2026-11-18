@@ -323,8 +323,8 @@ object Config:
     }
   object Deforest:
     val default = Deforest(FlowAnalysisConfig(
-      debug = true,
-      // debug = false,
+      // debug = true,
+      debug = false,
       mono = false,
       trackNonAffine = true,
       trackAccumulator = false,
