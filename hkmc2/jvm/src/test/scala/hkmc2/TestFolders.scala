@@ -77,7 +77,7 @@ object TestFolders:
       case "flowopt-dnone" => (true, N)
       case "flowopt-dopt" => (true, S(true))
       case "flowopt-none" => (false, N)
-      case "flowopt-opt" => (false, S(false))
+      case "flowopt-popt" => (false, S(false))
     benchConfig(wd).copy(preservePrivateAbi = false).mapOptimizer: opt =>
       opt.copy(
         deforest = if deforest then S(Config.Deforest.default) else N,
@@ -112,7 +112,7 @@ object TestFolders:
     diffTestDir(wd)/"slop"
 
   // the flow-opt variants, each a directory of the same name under `mlscript/` and `mlscript-compile/`
-  val flowVariants: Ls[Str] = "flowopt-dnone" :: "flowopt-dopt" :: "flowopt-none" :: "flowopt-opt" :: Nil
+  val flowVariants: Ls[Str] = "flowopt-dnone" :: "flowopt-dopt" :: "flowopt-none" :: "flowopt-popt" :: Nil
 
   /** Diff test subdirectory of one flow-opt variant, for its hkmc2Flow*Tests project. */
   def flowDiffDir(wd: os.Path, variant: Str): os.Path =

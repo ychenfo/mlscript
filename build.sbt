@@ -130,7 +130,7 @@ lazy val hkmc2WasmTests = hkmc2TestSubproject("hkmc2WasmTests", Some("WasmCompil
 lazy val hkmc2FlowDnoneTests = hkmc2TestSubproject("hkmc2FlowDnoneTests", Some("FlowDnoneCompileTestRunner"), "FlowDnoneDiffTestRunner")
 lazy val hkmc2FlowDoptTests = hkmc2TestSubproject("hkmc2FlowDoptTests", Some("FlowDoptCompileTestRunner"), "FlowDoptDiffTestRunner")
 lazy val hkmc2FlowNoneTests = hkmc2TestSubproject("hkmc2FlowNoneTests", Some("FlowNoneCompileTestRunner"), "FlowNoneDiffTestRunner")
-lazy val hkmc2FlowOptTests = hkmc2TestSubproject("hkmc2FlowOptTests", Some("FlowOptCompileTestRunner"), "FlowOptDiffTestRunner")
+lazy val hkmc2FlowPoptTests = hkmc2TestSubproject("hkmc2FlowPoptTests", Some("FlowPoptCompileTestRunner"), "FlowPoptDiffTestRunner")
 lazy val hkmc2SlopTests = hkmc2TestSubproject("hkmc2SlopTests", None, "SlopDiffTestRunner")
   .settings(
     // These worksheets load main-suite fixtures such as Iter.mjs and the Wasm.mjs
@@ -189,7 +189,7 @@ addCommandAlias("sdtest", "hkmc2SlopTests/testOnly hkmc2.SlopDiffTestRunner -- -
 addCommandAlias("fddnone", "hkmc2FlowDnoneTests/testOnly hkmc2.FlowDnoneDiffTestRunner -- -z")
 addCommandAlias("fddopt", "hkmc2FlowDoptTests/testOnly hkmc2.FlowDoptDiffTestRunner -- -z")
 addCommandAlias("fdnone", "hkmc2FlowNoneTests/testOnly hkmc2.FlowNoneDiffTestRunner -- -z")
-addCommandAlias("fdopt", "hkmc2FlowOptTests/testOnly hkmc2.FlowOptDiffTestRunner -- -z")
+addCommandAlias("fdpopt", "hkmc2FlowPoptTests/testOnly hkmc2.FlowPoptDiffTestRunner -- -z")
 // Compilation tests
 addCommandAlias("ctest", "hkmc2JVM/testOnly hkmc2.CompileTestRunner -- -z")
 addCommandAlias("cntest", "hkmc2NofibTests/testOnly hkmc2.NofibCompileTestRunner -- -z")
@@ -198,12 +198,12 @@ addCommandAlias("cwtest", "hkmc2WasmTests/testOnly hkmc2.WasmCompileTestRunner -
 addCommandAlias("fcdnone", "hkmc2FlowDnoneTests/testOnly hkmc2.FlowDnoneCompileTestRunner -- -z")
 addCommandAlias("fcdopt", "hkmc2FlowDoptTests/testOnly hkmc2.FlowDoptCompileTestRunner -- -z")
 addCommandAlias("fcnone", "hkmc2FlowNoneTests/testOnly hkmc2.FlowNoneCompileTestRunner -- -z")
-addCommandAlias("fcopt", "hkmc2FlowOptTests/testOnly hkmc2.FlowOptCompileTestRunner -- -z")
+addCommandAlias("fcpopt", "hkmc2FlowPoptTests/testOnly hkmc2.FlowPoptCompileTestRunner -- -z")
 // `fcs <variants> <filter>...` and `fds <variants> <filter>...` run the `fc<variant>`/`fd<variant>` aliases above for
 // `all` variants or a comma-separated subset of them, with each filter as a `-z` substring (eg `nofib/ansi`, `eff`, `fft`)
 // they run one variant at a time with a gc and a pause in between, as running them back to back can exhaust sbt's heap;
 // a failure skips the queued commands up to the next `FailureWall`, so one after each variant lets the next ones run
-val flowVariants = Seq("dnone", "dopt", "none", "opt")
+val flowVariants = Seq("dnone", "dopt", "none", "popt")
 val flowRunCurrent = AttributeKey[String]("flowRunCurrent")
 val flowRunFailures = AttributeKey[Seq[String]]("flowRunFailures")
 val flowRunSavedOnFailure = AttributeKey[Option[Exec]]("flowRunSavedOnFailure")

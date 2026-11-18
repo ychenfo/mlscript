@@ -1,7 +1,0 @@
-:.
-:js
-
-
-import "../../../mlscript-compile/flowopt-opt/eff/simple.mls"
-simple.main()
-//│ = [-33093, 6787]
