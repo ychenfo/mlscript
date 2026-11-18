@@ -46,7 +46,7 @@ main_testCryptarithm_nofib_lambda$_lambda$lambda = function main_testCryptarithm
   let tmp, tmp1, inlinedVal, inlinedVal1;
   tmp = 9 + i;
   tmp1 = main_testCryptarithm_nofib_lambda$_lambda_enumFromTo$enumFromTo(0, tmp);
-  inlinedVal = tmp1(undefined, 10, undefined);
+  inlinedVal = tmp1(undefined, 7, undefined);
   inlinedVal1 = inlinedVal();
   return cryptarithm12[filter$accessorSymbol](cryptarithm12[condition$accessorSymbol], inlinedVal1)
 };
@@ -150,11 +150,11 @@ lscomp = function lscomp(k, p1) {
     tmp8 = a * 100000;
     return tmp7 + tmp8
   }
-  static #condition(thirywelvn) {
-    let arg$Cons$0$, arg$Cons$1$, arg$Cons$0$1, arg$Cons$1$1, arg$Cons$0$2, arg$Cons$1$2, arg$Cons$0$3, arg$Cons$1$3, arg$Cons$0$4, arg$Cons$1$4, arg$Cons$0$5, arg$Cons$1$5, arg$Cons$0$6, arg$Cons$1$6, arg$Cons$0$7, arg$Cons$1$7, arg$Cons$0$8, arg$Cons$1$8, arg$Cons$0$9, arg$Cons$1$9, tmp, tmp1, tmp2, tmp3, tmp4;
-    if (thirywelvn instanceof NofibPrelude.Cons.class) {
-      arg$Cons$0$ = thirywelvn.head;
-      arg$Cons$1$ = thirywelvn.tail;
+  static #condition(onefuri) {
+    let arg$Cons$0$, arg$Cons$1$, arg$Cons$0$1, arg$Cons$1$1, arg$Cons$0$2, arg$Cons$1$2, arg$Cons$0$3, arg$Cons$1$3, arg$Cons$0$4, arg$Cons$1$4, arg$Cons$0$5, arg$Cons$1$5, arg$Cons$0$6, arg$Cons$1$6, tmp, tmp1, tmp2, tmp3, tmp4;
+    if (onefuri instanceof NofibPrelude.Cons.class) {
+      arg$Cons$0$ = onefuri.head;
+      arg$Cons$1$ = onefuri.tail;
       if (arg$Cons$1$ instanceof NofibPrelude.Cons.class) {
         arg$Cons$0$1 = arg$Cons$1$.head;
         arg$Cons$1$1 = arg$Cons$1$.tail;
@@ -173,28 +173,13 @@ lscomp = function lscomp(k, p1) {
                 if (arg$Cons$1$5 instanceof NofibPrelude.Cons.class) {
                   arg$Cons$0$6 = arg$Cons$1$5.head;
                   arg$Cons$1$6 = arg$Cons$1$5.tail;
-                  if (arg$Cons$1$6 instanceof NofibPrelude.Cons.class) {
-                    arg$Cons$0$7 = arg$Cons$1$6.head;
-                    arg$Cons$1$7 = arg$Cons$1$6.tail;
-                    if (arg$Cons$1$7 instanceof NofibPrelude.Cons.class) {
-                      arg$Cons$0$8 = arg$Cons$1$7.head;
-                      arg$Cons$1$8 = arg$Cons$1$7.tail;
-                      if (arg$Cons$1$8 instanceof NofibPrelude.Cons.class) {
-                        arg$Cons$0$9 = arg$Cons$1$8.head;
-                        arg$Cons$1$9 = arg$Cons$1$8.tail;
-                        if (arg$Cons$1$9 instanceof NofibPrelude.Nil.class) {
-                          tmp = cryptarithm1.#expand(arg$Cons$0$, arg$Cons$0$1, arg$Cons$0$2, arg$Cons$0$3, arg$Cons$0$, arg$Cons$0$4);
-                          tmp1 = cryptarithm1.#expand(arg$Cons$0$, arg$Cons$0$5, arg$Cons$0$6, arg$Cons$0$7, arg$Cons$0$8, arg$Cons$0$6);
-                          tmp2 = 5 * tmp1;
-                          tmp3 = tmp + tmp2;
-                          tmp4 = cryptarithm1.#expand(arg$Cons$0$9, arg$Cons$0$2, arg$Cons$0$9, arg$Cons$0$6, arg$Cons$0$, arg$Cons$0$4);
-                          return tmp3 == tmp4
-                        }
-                        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                  if (arg$Cons$1$6 instanceof NofibPrelude.Nil.class) {
+                    tmp = cryptarithm1.#expand(0, 0, 0, arg$Cons$0$, arg$Cons$0$1, arg$Cons$0$2);
+                    tmp1 = cryptarithm1.#expand(0, 0, arg$Cons$0$3, arg$Cons$0$, arg$Cons$0$4, arg$Cons$0$5);
+                    tmp2 = 2 * tmp1;
+                    tmp3 = tmp + tmp2;
+                    tmp4 = cryptarithm1.#expand(0, 0, arg$Cons$0$1, arg$Cons$0$6, arg$Cons$0$1, arg$Cons$0$2);
+                    return tmp3 == tmp4
                   }
                   throw globalThis.Object.freeze(new globalThis.Error("match error"));
                 }

@@ -4,7 +4,10 @@ import "./NofibPrelude.mls"
 open NofibPrelude
 
 // port changes from nofib/cryptarithm1.mls: self-contained except for the shared NofibPrelude (the list
-// functions it used are copied in); no type annotations
+// functions it used are copied in); no type annotations; a smaller puzzle: the original solves
+// THIRTY + 5 * TWELVE = NINETY over all ten digits (3628800 permutations), and `permutations` builds its
+// result with one stack frame per element, which overflows the stack; this one solves
+// ONE + 2 * FOUR = NINE (also 1 + 2 * 4 = 9) over the digits 0 to 6 (5040 permutations, one solution)
 
 
 module cryptarithm1 with ...
@@ -34,9 +37,9 @@ private fun filter(f, ls) = if ls is
 
 private fun expand(a, b, c, d, e, f) = f + (e*10) + (d*100) + (c*1000) + (b*10000) + (a*100000)
 
-private fun condition(thirywelvn) = if thirywelvn is
-  t :: h :: i :: r :: y :: w :: e :: l :: v :: n :: Nil then
-    (expand(t, h, i, r, t, y) + 5 * expand(t, w, e, l, v, e)) == expand(n, i, n, e, t, y)
+private fun condition(onefuri) = if onefuri is
+  o :: n :: e :: f :: u :: r :: i :: Nil then
+    (expand(0, 0, 0, o, n, e) + 2 * expand(0, 0, f, o, u, r)) == expand(0, 0, n, i, n, e)
 
 private fun addj(j, ls) = if ls is
   Nil then (j :: Nil) :: Nil
@@ -61,7 +64,7 @@ private fun permutations(ls) = if ls is
     lscomp1(permutations(js))
 
 private fun testCryptarithm_nofib(n) = 
-  map((i => let p0 = take(10, enumFromTo(0, 9 + i)) in filter(condition, permutations(p0))), enumFromTo(1, n))
+  map((i => let p0 = take(7, enumFromTo(0, 9 + i)) in filter(condition, permutations(p0))), enumFromTo(1, n))
 
 
 fun main() = testCryptarithm_nofib(1)
