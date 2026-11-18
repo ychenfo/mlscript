@@ -1,17 +1,4 @@
-// usage: node bench/tinybench.mjs [--variants dnone,dopt,dpopt,none,opt,popt] [--only eff,nofib/ansi]
-//          [--time 1000] [--min-samples 10] [--bench-min] [--sizes]
-// e.g. node --stack-size=16384 bench/tinybench.mjs --only eff --bench-min --time 1000 --min-samples 1
-// e.g. node --stack-size=16384 bench/tinybench.mjs --only eff/fft --variants dnone,popt
-// e.g. node --stack-size=16384 bench/tinybench.mjs --only eff,nofib/ansi --time 3000 --bench-min
-// e.g. node --stack-size=16384 bench/tinybench.mjs --sizes --only nofib
-// e.g. node --stack-size=16384 bench/tinybench.mjs --only eff/fft --min-samples 50
-// benchmarks `main()` of every compiled `flowopt-<variant>/{eff,nofib}/*.mjs`; one tinybench suite per program,
-// one task per variant, so the variants of the same program are directly comparable
-//   --bench-min  also benchmarks the terser outputs (written next to the sources as <prog>.terse.*.mjs,
-//                like nofib/runterse.fish does, so that their relative imports keep working)
-//   --sizes      instead of timing, prints per-variant byte sizes (raw / terser mangle only / terser compress+mangle,
-//                each plain and gzipped), the same columns as nofib/runterse.fish
-//   --only       programs to run: a group (eff, nofib), a program as group/name (eff/fft), or a bare name (fft)
+// benchmarks `main()` of the compiled flow-opt benchmark programs; run with --help for the flags
 import { Bench } from "tinybench"
 import { minify } from "terser"
 import { gzipSync } from "node:zlib"
@@ -22,14 +9,94 @@ import { fileURLToPath, pathToFileURL } from "node:url"
 const compileDir = join(dirname(fileURLToPath(import.meta.url)),
   "../hkmc2/shared/src/test/mlscript-compile")
 
-const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) =>
-  a.startsWith("--") ? [...acc, [a.slice(2), all[i + 1]]] : acc, []))
-const variants = (args.variants ?? "dnone,dopt,dpopt,none,opt,popt").split(",")
-const only = args.only?.split(",")
-const time = Number(args.time ?? 1000)
-const minSamples = Number(args["min-samples"] ?? 10)
-const benchMin = "bench-min" in args
-const sizes = "sizes" in args
+const allVariants = ["dnone", "dopt", "dpopt", "none", "opt", "popt"]
+const allForms = ["raw", "unmin", "min"]
+
+const help = `usage: node --stack-size=16384 bench/tinybench.mjs [flags]
+
+Times main() of the compiled benchmark programs, hkmc2/shared/src/test/mlscript-compile/flowopt-<variant>/{eff,nofib}/
+<prog>.mjs (compile them first in sbt: fcs all eff/ nofib/). Each program gets one tinybench suite with one task per
+(variant, form), so all the variants of a program are timed side by side. The output is console tables, one per
+program, which bench/parse-results.mjs turns into a csv and bench/results-viewer.html reads directly.
+
+flags:
+  --variants <v,...>   variants to include (default: all), any of
+                         dnone   deforestation, no flow-based opt
+                         dopt    deforestation + mono flow-based opt
+                         dpopt   deforestation + poly flow-based opt
+                         none    neither
+                         opt     mono flow-based opt
+                         popt    poly flow-based opt
+  --filter <p,...>     programs to include (default: all): a group (eff, nofib), a program (eff/fft),
+                       or a bare name (fft, which matches it in any group)
+  --forms <f,...>      forms each variant is timed in, in this order (default: raw):
+                         raw     the compiled module
+                         unmin   its terser output with names mangled only (no code changes)
+                         min     its terser output compressed and mangled (terser also folds and removes code)
+                       the terser outputs are written next to the module as <prog>.terse.<form>.mjs, so that its
+                       relative imports keep working; their tasks are labelled "<variant> <form>"
+  --time <ms>          minimum time per task in milliseconds (default: 1000)
+  --min-samples <n>    minimum samples per task (default: 10); a task runs until both --time and --min-samples are
+                       reached, so a slow program stops after n samples and a fast one after --time ms;
+                       before timing, each task gets ceil(n/4) warmup calls, plus one probe call per module so that
+                       a broken module fails before anything is timed
+  --sizes              print byte sizes instead of timing: per variant, the raw module, its unmin and its min terser
+                       outputs, each plain and gzipped (level 9); --forms, --time and --min-samples are ignored
+  --help               print this message
+
+programs that read input files (nofib/rsa, nofib/sorting, nofib/treejoin) get their contents as main(...) arguments,
+read once from hkmc2/shared/src/test/mlscript/nofib/input/ before timing
+
+notes:
+  - run node with --stack-size=16384: some programs recurse deeply; if node segfaults instead of throwing a stack
+    overflow, the OS stack of node's main thread is smaller than that (raise it with ulimit -s, or lower --stack-size)
+  - the machine should be otherwise idle; results are rough with few samples
+
+examples:
+  node --stack-size=16384 bench/tinybench.mjs --forms raw,unmin,min
+  node --stack-size=16384 bench/tinybench.mjs --filter eff --forms unmin,min --time 3000 --min-samples 20
+  node --stack-size=16384 bench/tinybench.mjs --filter eff/fft --variants dnone,dpopt --min-samples 50
+  node --stack-size=16384 bench/tinybench.mjs --sizes --filter nofib > sizes.txt
+  node bench/parse-results.mjs sizes.txt --out sizes.csv`
+
+// `--flag value` for the flags with values, `--flag` for the others
+const valueFlags = ["variants", "filter", "forms", "time", "min-samples"]
+const booleanFlags = ["sizes", "help"]
+const args = {}
+const argv = process.argv.slice(2)
+for (let i = 0; i < argv.length; i++) {
+  const flag = argv[i].startsWith("--") ? argv[i].slice(2) : null
+  const fail = msg => { console.error(`${msg}\nrun with --help for the flags`); process.exit(1) }
+  if (flag === null) fail(`unexpected argument: ${argv[i]}`)
+  else if (booleanFlags.includes(flag)) args[flag] = true
+  else if (valueFlags.includes(flag)) {
+    if (i + 1 >= argv.length || argv[i + 1].startsWith("--")) fail(`--${flag} needs a value`)
+    args[flag] = argv[++i]
+  }
+  else fail(`unknown flag: --${flag}`)
+}
+if (args.help) { console.log(help); process.exit(0) }
+
+const listFlag = (name, all, dflt) => {
+  const vals = (args[name] ?? dflt.join(",")).split(",")
+  const unknown = vals.filter(v => !all.includes(v))
+  if (unknown.length > 0) {
+    console.error(`unknown --${name} ${unknown.join(",")}; expected some of ${all.join(",")}`)
+    process.exit(1)
+  }
+  return vals
+}
+const numberFlag = (name, dflt) => {
+  const n = Number(args[name] ?? dflt)
+  if (!(n > 0)) { console.error(`--${name} must be a positive number, got ${args[name]}`); process.exit(1) }
+  return n
+}
+const variants = listFlag("variants", allVariants, allVariants)
+const forms = listFlag("forms", allForms, ["raw"])
+const filter = args.filter?.split(",")
+const time = numberFlag("time", 1000)
+const minSamples = numberFlag("min-samples", 10)
+const sizes = args.sizes === true
 
 // without `concurrency: "task"`, tinybench samples a task until both `time` ms and `iterations` samples are reached
 // (`iterations` is a floor, not a cap): a slow program stops right after `minSamples`, a fast one runs for `time` ms
@@ -40,7 +107,7 @@ const benchDescription = `at least ${time} ms and ${minSamples} samples each`
 // a program is `group/name`, e.g. `eff/fft`; its compiled module is `flowopt-<variant>/<group>/<name>.mjs`
 const groups = ["eff", "nofib"]
 const sourceFile = (v, prog) => join(compileDir, `flowopt-${v}`, prog + ".mjs")
-const terseFile = (v, prog, mode) => join(compileDir, `flowopt-${v}`, `${prog}.terse.${mode}.mjs`)
+const terseFile = (v, prog, form) => join(compileDir, `flowopt-${v}`, `${prog}.terse.${form}.mjs`)
 const isTerseOutput = f => f.includes(".terse.")
 // modules imported by the programs, without a `main` of their own
 const libraries = ["NofibPrelude.mjs"]
@@ -59,29 +126,26 @@ const inputFiles = {
 }
 const mainArgsOf = prog => (inputFiles[prog] ?? []).map(f => readFileSync(join(inputDir, f), "utf8"))
 
-// `--only` tokens: `group/name` is one program, `group` is every program of that group, `name` is that program in any group
+// `--filter` tokens: `group/name` is one program, `group` is every program of that group, `name` is that program in any group
 const selected = prog => {
-  if (!only) return true
+  if (!filter) return true
   const [group, name] = prog.split("/")
-  return only.some(s => s === prog || s === group || s === name)
+  return filter.some(s => s === prog || s === group || s === name)
 }
 const programs = [...new Set(variants.flatMap(programsOf))].sort().filter(selected)
 if (programs.length === 0) {
   console.error(`no compiled programs found under ${compileDir}/flowopt-<variant>/ for variants ${variants.join(",")}`
-    + (only ? ` and --only ${only.join(",")}` : "") + "; compile them first (ctest)")
+    + (filter ? ` and --filter ${filter.join(",")}` : "") + "; compile them first (fcs <variants> eff/ nofib/ in sbt)")
   process.exit(1)
 }
 
 // the two terser modes of nofib/runterse.fish (comments dropped), plus `module: true`: the outputs are ES modules,
 // and without it terser keeps every top-level name verbatim, i.e. the long names of lifted functions and their copies
-const terserModes = {
-  uncompressed: { module: true, compress: false, mangle: true, format: { comments: false } },
-  compressed: { module: true, compress: {}, mangle: true, format: { comments: false } },
+const terserOptions = {
+  unmin: { module: true, compress: false, mangle: true, format: { comments: false } },
+  min: { module: true, compress: {}, mangle: true, format: { comments: false } },
 }
-const terse = async code => ({
-  uncompressed: (await minify(code, terserModes.uncompressed)).code,
-  compressed: (await minify(code, terserModes.compressed)).code,
-})
+const terse = async (code, form) => (await minify(code, terserOptions[form])).code
 const bytes = s => Buffer.byteLength(s)
 const gzBytes = s => gzipSync(s, { level: 9 }).length
 
@@ -90,29 +154,30 @@ const printSizes = async prog => {
   for (const v of variants) {
     if (!programsOf(v).includes(prog)) continue
     const raw = readFileSync(sourceFile(v, prog), "utf8")
-    const { uncompressed, compressed } = await terse(raw)
+    const unmin = await terse(raw, "unmin")
+    const min = await terse(raw, "min")
     rows[v] = {
       RAW: bytes(raw), "RAW.GZ": gzBytes(raw),
-      UNMIN: bytes(uncompressed), "UNMIN.GZ": gzBytes(uncompressed),
-      MIN: bytes(compressed), "MIN.GZ": gzBytes(compressed),
+      UNMIN: bytes(unmin), "UNMIN.GZ": gzBytes(unmin),
+      MIN: bytes(min), "MIN.GZ": gzBytes(min),
     }
   }
   console.log(`\n== ${prog}`)
   console.table(rows)
 }
 
-// the benchmarked entries of a program: each variant's compiled module, plus its terser outputs with --bench-min
+// the benchmarked entries of a program: each variant in each of the --forms, labelled `<variant>` for the compiled
+// module itself and `<variant> <form>` for a terser output
 const entriesOf = async prog => {
   const entries = []
   for (const v of variants) {
     if (!programsOf(v).includes(prog)) continue
-    entries.push({ label: v, file: sourceFile(v, prog) })
-    if (benchMin) {
-      const outputs = await terse(readFileSync(sourceFile(v, prog), "utf8"))
-      for (const [mode, code] of Object.entries(outputs)) {
-        const file = terseFile(v, prog, mode)
-        writeFileSync(file, code)
-        entries.push({ label: `${v} ${mode === "compressed" ? "min" : "unmin"}`, file })
+    for (const form of forms) {
+      if (form === "raw") entries.push({ label: v, file: sourceFile(v, prog) })
+      else {
+        const file = terseFile(v, prog, form)
+        writeFileSync(file, await terse(readFileSync(sourceFile(v, prog), "utf8"), form))
+        entries.push({ label: `${v} ${form}`, file })
       }
     }
   }
