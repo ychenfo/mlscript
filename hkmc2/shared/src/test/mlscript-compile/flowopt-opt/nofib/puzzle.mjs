@@ -11,7 +11,7 @@ const bankEq$accessorSymbol = globalThis.Symbol("bankEq");
 const stateEq$accessorSymbol = globalThis.Symbol("stateEq");
 const updateState$accessorSymbol = globalThis.Symbol("updateState");
 const writeState$accessorSymbol = globalThis.Symbol("writeState");
-let puzzle1, lambda, main_testPuzzle_nofib_writeSolutions_writeHistory_foldr$foldr, main_testPuzzle_nofib_writeSolutions$writeSolutions, main_testPuzzle_nofib_writeSolutions_writeHistory_lambda$$lambda$, main_testPuzzle_nofib_writeSolutions_writeHistory_lambda$_lambda$_lambda$lambda, main_testPuzzle_nofib_transfer_lambda$_lambda$lambda, main_testPuzzle_nofib_transfer_lambda$$lambda$, main_testPuzzle_nofib_writeSolutions_writeHistory_foldr$foldr$worker, main_testPuzzle_nofib_transfer$lscomp2_lscomp3_main_testPuzzle_nofib_transfer$transfer_main_testPuzzle_nofib_transfer$lscomp1;
+let puzzle1, lambda, main_testPuzzle_nofib_writeSolutions_writeHistory_foldr$foldr, main_testPuzzle_nofib_writeSolutions$writeSolutions, main_testPuzzle_nofib_writeSolutions_writeHistory_lambda$$lambda$, main_testPuzzle_nofib_writeSolutions_writeHistory_lambda$_lambda$_lambda$lambda, main_testPuzzle_nofib_transfer_lambda$_lambda$lambda, main_testPuzzle_nofib_transfer_lambda$$lambda$, main_testPuzzle_nofib_transfer_lambda$_lambda$lambda1, main_testPuzzle_nofib_transfer_lambda$$lambda$1, main_testPuzzle_nofib_writeSolutions_writeHistory_foldr$foldr$worker, main_testPuzzle_nofib_transfer$lscomp2_lscomp3_main_testPuzzle_nofib_transfer$transfer_main_testPuzzle_nofib_transfer$lscomp1;
 main_testPuzzle_nofib_transfer$lscomp2_lscomp3_main_testPuzzle_nofib_transfer$transfer_main_testPuzzle_nofib_transfer$lscomp1 = function main_testPuzzle_nofib_transfer$lscomp2_lscomp3_main_testPuzzle_nofib_transfer$transfer_main_testPuzzle_nofib_transfer$lscomp1(id, param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
   switch (id) {
     case 0:
@@ -268,7 +268,7 @@ main_testPuzzle_nofib_transfer$lscomp2_lscomp3_main_testPuzzle_nofib_transfer$tr
           if (scrut === true) {
             let inlinedVal1, lambda$here;
             newDest = param0[updateState$accessorSymbol](param2, arg$Cons$0$, param7);
-            lambda$here = main_testPuzzle_nofib_transfer_lambda$$lambda$(param0, newDest);
+            lambda$here = main_testPuzzle_nofib_transfer_lambda$$lambda$1(param0, newDest);
             inlinedVal1 = param0[all$accessorSymbol](lambda$here, param5);
             if (inlinedVal1 === true) {
               let receiver1, inlinedVal2;
@@ -388,6 +388,20 @@ main_testPuzzle_nofib_transfer_lambda$_lambda$lambda = function main_testPuzzle_
 main_testPuzzle_nofib_transfer_lambda$$lambda$ = function main_testPuzzle_nofib_transfer_lambda$$lambda$(puzzle2, state) {
   return (caseScrut) => {
     return main_testPuzzle_nofib_transfer_lambda$_lambda$lambda(puzzle2, state, caseScrut)
+  }
+};
+main_testPuzzle_nofib_transfer_lambda$_lambda$lambda1 = function main_testPuzzle_nofib_transfer_lambda$_lambda$lambda(puzzle2, state, caseScrut) {
+  let element1$, tmp;
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    element1$ = runtime.Tuple.get(caseScrut, 1);
+    tmp = puzzle2[stateEq$accessorSymbol](state, element1$);
+    return ! tmp
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_testPuzzle_nofib_transfer_lambda$$lambda$1 = function main_testPuzzle_nofib_transfer_lambda$$lambda$(puzzle2, state) {
+  return (caseScrut) => {
+    return main_testPuzzle_nofib_transfer_lambda$_lambda$lambda1(puzzle2, state, caseScrut)
   }
 };
 lambda = (undefined, function (x) {

@@ -1886,12 +1886,27 @@ class BlockSimplifier
                 Assign(resSym, r2, Break(lblSym))
             case _ => super.applyBlock(b)
         
+          // the flow analysis tells sites apart by the identity of their result nodes, so every inlined copy
+          // gets its own nodes, also where it refreshes no symbol: a fresh leaf makes the transformer rebuild
+          // every node above it, and `applyResult` below covers the results without leaves
           override def applyValue(v: Value)(k: Value => Block): Block = v match
             case Value.This(sym: InnerSymbol) if thisMapping.contains(sym) =>
               thisMapping(sym) match
               case v2: Value => k(v2)
               case _ => super.applyValue(v)(k)
-            case _ => super.applyValue(v)(k)
+            case _ => super.applyValue(v): v2 =>
+              k(if v2 isnt v then v2 else v match
+                case v: Value.SimpleRef => v.copy()(v.toLoc)
+                case v: Value.MemberRef => v.copy()(v.toLoc)
+                case v: Value.This => v.copy()(v.toLoc)
+                case v: Value.Lit => v.copy()(v.toLoc))
+          
+          override def applyResult(r: Result)(k: Result => Block): Block =
+            super.applyResult(r): r2 =>
+              k(if r2 isnt r then r2 else r match
+                case t: Tuple => t.copy()(t.toLoc)
+                case rc: Record => rc.copy()(rc.toLoc)
+                case _ => r2)
 
           override def applyPath(p: Path)(k: Path => Block): Block = p match
             case Value.This(sym: InnerSymbol) if thisMapping.contains(sym) =>

@@ -20,7 +20,7 @@ const alloc$accessorSymbol = globalThis.Symbol("alloc");
 const listMap$tailrec$accessorSymbol = globalThis.Symbol("listMap$tailrec");
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
 const listPairAllEq$tailrec$accessorSymbol = globalThis.Symbol("listPairAllEq$tailrec");
-let ins, foldf, ins1, foldf1, kcfa1, lambda, lambda1, lambda$, lambda$1, lambda$2, main_explore_absNext_apply$_apply_lambda$_setUnion$setUnion, main_explore_absNext_apply$_apply_lambda$$lambda$, main_explore_absNext_apply$_apply$apply, main_explore_absNext_apply$$apply$, main_explore_member_lambda$_stateSame$stateSame, main_explore_member_lambda$$lambda$, main_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare, main_summarize_lambda$_lambda_setUnion$setUnion, main_summarize_lambda$_lambda$lambda, main_summarize_lambda$$lambda$, main_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, main_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, main_monovariantStore_lambda$_lambda_lambda$$lambda$, main_monovariantStore_lambda$_lambda$lambda, main_monovariantStore_lambda$$lambda$, main_summarize_lambda$_lambda_setUnion_ins_incr$incr, main_summarize_lambda$_lambda_setUnion_incr$incr, main_summarize_lambda$_lambda_setUnion_ins_incr$incr1, main_summarize_lambda$_lambda_setUnion_ins_incr$incr2, main_summarize_lambda$_lambda_setUnion_ins_incr$incr3, main_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr, main_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns, main_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1, main_summarize_lambda$_lambda_union$_union_incr$incr, main_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2, main_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr, main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr, main_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1, main_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2, main_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3, main_explore_absNext_atomEval_eval$_eval$eval, main_explore_absNext_atomEval_eval$$eval$, main_lambda$_lambda$lambda, main_lambda$$lambda$;
+let ins, foldf, ins1, foldf1, kcfa1, lambda, lambda1, lambda$, lambda$1, lambda$2, main_explore_absNext_apply$_apply_lambda$_setUnion$setUnion, main_explore_absNext_apply$_apply_lambda$$lambda$, main_explore_absNext_apply$_apply$apply, main_explore_absNext_apply$$apply$, main_explore_member_lambda$_stateSame$stateSame, main_explore_member_lambda$$lambda$, main_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare, main_summarize_lambda$_lambda_setUnion$setUnion, main_summarize_lambda$_lambda$lambda, main_summarize_lambda$$lambda$, main_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, main_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, main_monovariantStore_lambda$_lambda_lambda$$lambda$, main_monovariantStore_lambda$_lambda$lambda, main_monovariantStore_lambda$$lambda$, main_summarize_lambda$_lambda_setUnion_ins_incr$incr, main_summarize_lambda$_lambda_setUnion_incr$incr, main_summarize_lambda$_lambda_setUnion_incr$incr1, main_summarize_lambda$_lambda_setUnion_incr$incr2, main_summarize_lambda$_lambda_setUnion_ins_incr$incr1, main_summarize_lambda$_lambda_setUnion_ins_incr$incr2, main_summarize_lambda$_lambda_setUnion_ins_incr$incr3, main_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr, main_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns, main_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1, main_summarize_lambda$_lambda_union$_union_incr$incr, main_summarize_lambda$_lambda_union$_union_incr$incr1, main_summarize_lambda$_lambda_union$_union_incr$incr2, main_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2, main_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr, main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr, main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr1, main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr2, main_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1, main_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2, main_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3, main_explore_absNext_atomEval_eval$_eval$eval, main_explore_absNext_atomEval_eval$$eval$, main_lambda$_lambda$lambda, main_lambda$$lambda$;
 main_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main_explore_absNext_apply$_apply_lambda$_setUnion$setUnion(set1, set2) {
   let arg$SET$1$, arg$SET$1$1, element1$;
   if (set1 instanceof kcfa1.SET.class) {
@@ -298,7 +298,7 @@ main_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main_expl
                           if (inlinedVal3 instanceof kcfa2.LESS.class) {
                             let inlinedVal5;
                             tmp = n + 1;
-                            inlinedVal5 = main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr2(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             n = tmp;
                             result = inlinedVal5;
@@ -306,7 +306,7 @@ main_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main_expl
                           } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                             let inlinedVal5;
                             tmp1 = n + 1;
-                            inlinedVal5 = main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr1(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             t2 = element1$2;
                             n = tmp1;
@@ -1162,7 +1162,7 @@ main_summarize_lambda$_lambda_setUnion$setUnion = function main_summarize_lambda
                           if (inlinedVal3 instanceof kcfa2.LESS.class) {
                             let inlinedVal5;
                             tmp = n + 1;
-                            inlinedVal5 = main_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = main_summarize_lambda$_lambda_setUnion_incr$incr2(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             n = tmp;
                             result = inlinedVal5;
@@ -1170,7 +1170,7 @@ main_summarize_lambda$_lambda_setUnion$setUnion = function main_summarize_lambda
                           } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                             let inlinedVal5;
                             tmp1 = n + 1;
-                            inlinedVal5 = main_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = main_summarize_lambda$_lambda_setUnion_incr$incr1(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             t2 = element1$2;
                             n = tmp1;
@@ -1393,7 +1393,7 @@ main_summarize_lambda$_lambda$lambda = function main_summarize_lambda$_lambda$la
                       let inlinedVal3;
                       tmp1 = n + 1;
                       tmp2 = runtime.safeCall(mergeFn(arg$SmT$3$, arg$SmT$3$1));
-                      inlinedVal3 = main_summarize_lambda$_lambda_union$_union_incr$incr(kcfa3, arg$SmT$2$, tmp2, kcfa3.SmE, result1);
+                      inlinedVal3 = main_summarize_lambda$_lambda_union$_union_incr$incr1(kcfa3, arg$SmT$2$, tmp2, kcfa3.SmE, result1);
                       t1 = element1$1;
                       t2 = element1$2;
                       n = tmp1;
@@ -1402,7 +1402,7 @@ main_summarize_lambda$_lambda$lambda = function main_summarize_lambda$_lambda$la
                     } else if (scrut instanceof kcfa3.GREATER.class) {
                       let inlinedVal3;
                       tmp3 = n + 1;
-                      inlinedVal3 = main_summarize_lambda$_lambda_union$_union_incr$incr(kcfa3, arg$SmT$2$1, arg$SmT$3$1, kcfa3.SmE, result1);
+                      inlinedVal3 = main_summarize_lambda$_lambda_union$_union_incr$incr2(kcfa3, arg$SmT$2$1, arg$SmT$3$1, kcfa3.SmE, result1);
                       t2 = element1$2;
                       n = tmp3;
                       result1 = inlinedVal3;
@@ -1679,6 +1679,48 @@ main_summarize_lambda$_lambda_setUnion_incr$incr = function main_summarize_lambd
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
+main_summarize_lambda$_lambda_setUnion_incr$incr1 = function main_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, a1, t1, d) {
+  let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
+  if (d instanceof kcfa2.SetZERO.class) {
+    return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
+  } else if (d instanceof kcfa2.SetONE.class) {
+    arg$SetONE$0$ = d.item;
+    arg$SetONE$1$ = d.tree;
+    arg$SetONE$2$ = d.digit;
+    return kcfa2.SetTWO(a1, t1, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$)
+  } else if (d instanceof kcfa2.SetTWO.class) {
+    arg$SetTWO$0$ = d.item1;
+    arg$SetTWO$1$ = d.tree1;
+    arg$SetTWO$2$ = d.item2;
+    arg$SetTWO$3$ = d.tree2;
+    arg$SetTWO$4$ = d.digit;
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp1 = main_summarize_lambda$_lambda_setUnion_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    return kcfa2.SetONE(a1, t1, tmp1)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_summarize_lambda$_lambda_setUnion_incr$incr2 = function main_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, a1, t1, d) {
+  let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
+  if (d instanceof kcfa2.SetZERO.class) {
+    return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
+  } else if (d instanceof kcfa2.SetONE.class) {
+    arg$SetONE$0$ = d.item;
+    arg$SetONE$1$ = d.tree;
+    arg$SetONE$2$ = d.digit;
+    return kcfa2.SetTWO(a1, t1, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$)
+  } else if (d instanceof kcfa2.SetTWO.class) {
+    arg$SetTWO$0$ = d.item1;
+    arg$SetTWO$1$ = d.tree1;
+    arg$SetTWO$2$ = d.item2;
+    arg$SetTWO$3$ = d.tree2;
+    arg$SetTWO$4$ = d.digit;
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp1 = main_summarize_lambda$_lambda_setUnion_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    return kcfa2.SetONE(a1, t1, tmp1)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
 main_summarize_lambda$_lambda_setUnion_ins_incr$incr1 = function main_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
@@ -1842,6 +1884,54 @@ main_summarize_lambda$_lambda_union$_union_incr$incr = function main_summarize_l
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
+main_summarize_lambda$_lambda_union$_union_incr$incr1 = function main_summarize_lambda$_lambda_union$_union_incr$incr(kcfa2, ak1, a1, t1, d) {
+  let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1;
+  if (d instanceof kcfa2.SmZERO.class) {
+    return kcfa2.SmONE(ak1, a1, t1, kcfa2.SmZERO)
+  } else if (d instanceof kcfa2.SmONE.class) {
+    arg$SmONE$0$ = d.key;
+    arg$SmONE$1$ = d.value;
+    arg$SmONE$2$ = d.tree;
+    arg$SmONE$3$ = d.digit;
+    return kcfa2.SmTWO(ak1, a1, t1, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$)
+  } else if (d instanceof kcfa2.SmTWO.class) {
+    arg$SmTWO$0$ = d.key1;
+    arg$SmTWO$1$ = d.value1;
+    arg$SmTWO$2$ = d.tree1;
+    arg$SmTWO$3$ = d.key2;
+    arg$SmTWO$4$ = d.value2;
+    arg$SmTWO$5$ = d.tree2;
+    arg$SmTWO$6$ = d.digit;
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp1 = main_summarize_lambda$_lambda_union$_union_incr$incr1(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
+    return kcfa2.SmONE(ak1, a1, t1, tmp1)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_summarize_lambda$_lambda_union$_union_incr$incr2 = function main_summarize_lambda$_lambda_union$_union_incr$incr(kcfa2, ak1, a1, t1, d) {
+  let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1;
+  if (d instanceof kcfa2.SmZERO.class) {
+    return kcfa2.SmONE(ak1, a1, t1, kcfa2.SmZERO)
+  } else if (d instanceof kcfa2.SmONE.class) {
+    arg$SmONE$0$ = d.key;
+    arg$SmONE$1$ = d.value;
+    arg$SmONE$2$ = d.tree;
+    arg$SmONE$3$ = d.digit;
+    return kcfa2.SmTWO(ak1, a1, t1, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$)
+  } else if (d instanceof kcfa2.SmTWO.class) {
+    arg$SmTWO$0$ = d.key1;
+    arg$SmTWO$1$ = d.value1;
+    arg$SmTWO$2$ = d.tree1;
+    arg$SmTWO$3$ = d.key2;
+    arg$SmTWO$4$ = d.value2;
+    arg$SmTWO$5$ = d.tree2;
+    arg$SmTWO$6$ = d.digit;
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp1 = main_summarize_lambda$_lambda_union$_union_incr$incr2(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
+    return kcfa2.SmONE(ak1, a1, t1, tmp1)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
 main_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2 = function main_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr(kcfa2, ak1, a1, t1, d) {
   let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1;
   if (d instanceof kcfa2.SmZERO.class) {
@@ -1904,6 +1994,48 @@ main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr = function main_exp
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    return kcfa2.SetONE(a1, t1, tmp1)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr1 = function main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, a1, t1, d) {
+  let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
+  if (d instanceof kcfa2.SetZERO.class) {
+    return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
+  } else if (d instanceof kcfa2.SetONE.class) {
+    arg$SetONE$0$ = d.item;
+    arg$SetONE$1$ = d.tree;
+    arg$SetONE$2$ = d.digit;
+    return kcfa2.SetTWO(a1, t1, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$)
+  } else if (d instanceof kcfa2.SetTWO.class) {
+    arg$SetTWO$0$ = d.item1;
+    arg$SetTWO$1$ = d.tree1;
+    arg$SetTWO$2$ = d.item2;
+    arg$SetTWO$3$ = d.tree2;
+    arg$SetTWO$4$ = d.digit;
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp1 = main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    return kcfa2.SetONE(a1, t1, tmp1)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr2 = function main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, a1, t1, d) {
+  let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
+  if (d instanceof kcfa2.SetZERO.class) {
+    return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
+  } else if (d instanceof kcfa2.SetONE.class) {
+    arg$SetONE$0$ = d.item;
+    arg$SetONE$1$ = d.tree;
+    arg$SetONE$2$ = d.digit;
+    return kcfa2.SetTWO(a1, t1, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$)
+  } else if (d instanceof kcfa2.SetTWO.class) {
+    arg$SetTWO$0$ = d.item1;
+    arg$SetTWO$1$ = d.tree1;
+    arg$SetTWO$2$ = d.item2;
+    arg$SetTWO$3$ = d.tree2;
+    arg$SetTWO$4$ = d.digit;
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp1 = main_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));

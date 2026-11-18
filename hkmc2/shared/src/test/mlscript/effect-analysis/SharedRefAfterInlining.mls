@@ -1,0 +1,66 @@
+:js
+
+#config(liftDefns: Some(LiftDefns), aggressive: true, flowBasedOpt: Some(FlowBasedOpt(mono: false)))
+
+
+// * reduced from nofib `lambda`, which poly mode miscompiled (as `cryptarithm2`)
+// * inlining `bind` used to keep its reference to the lifted `s => ...` lambda as one IR node shared by all
+// * inlined copies; the flow analysis keys sites by node identity, so poly mode gave them one specialized copy,
+// * whose dead-parameter elimination came from `pushVar`'s `env => ...`, which ignores `env`, and
+// * `lookupVar`'s `env => ...` then received `undefined`
+:noSanityCheck
+:expect Con(5)
+data class St(r)
+fun run(m, s) = if m is St(f) then f(s)
+fun bind(m, f) = St(s => if run(m, s) is [s_, a] then run(f(a), s_))
+fun ret(a) = St(s => [s, a])
+val get = St(s => [s, s])
+fun evalState(m, s) = if run(m, s) is [s_, a] then a
+data
+  class
+    Var(s)
+    Con(i)
+    Seq(a, b)
+    App(a, b)
+fun lookupVar(v) = bind(get, env => ret(if env is Con(i) then env))
+fun withEnv(tmp, m) = ret(evalState(m, tmp))
+fun pushVar(v, t, m) = bind(get, env => withEnv(t, m))
+fun apply(b, a) = bind(get, orig => withEnv(orig, pushVar(0, a, eval(b))))
+fun eval(ter) = if ter is
+  Var(x) then bind(get, e => bind(lookupVar(x), t => eval(t)))
+  Seq(c, b) then bind(eval(c), vall => eval(b))
+  App(b, v) then apply(b, v)
+  Con(i) then ret(Con(i))
+if run(eval(App(Seq(Var("n"), Var("n")), Con(5))), Con(0)) is [env, t2] then t2
+//│ = Con(5)
+//│ get = St(fun)
+
+
+// * control: the same program without inlining
+:noInline
+:expect Con(5)
+data class St(r)
+fun run(m, s) = if m is St(f) then f(s)
+fun bind(m, f) = St(s => if run(m, s) is [s_, a] then run(f(a), s_))
+fun ret(a) = St(s => [s, a])
+val get = St(s => [s, s])
+fun evalState(m, s) = if run(m, s) is [s_, a] then a
+data
+  class
+    Var(s)
+    Con(i)
+    Seq(a, b)
+    App(a, b)
+fun lookupVar(v) = bind(get, env => ret(if env is Con(i) then env))
+fun withEnv(tmp, m) = ret(evalState(m, tmp))
+fun pushVar(v, t, m) = bind(get, env => withEnv(t, m))
+fun apply(b, a) = bind(get, orig => withEnv(orig, pushVar(0, a, eval(b))))
+fun eval(ter) = if ter is
+  Var(x) then bind(get, e => bind(lookupVar(x), t => eval(t)))
+  Seq(c, b) then bind(eval(c), vall => eval(b))
+  App(b, v) then apply(b, v)
+  Con(i) then ret(Con(i))
+if run(eval(App(Seq(Var("n"), Var("n")), Con(5))), Con(0)) is [env, t2] then t2
+//│ = Con(5)
+//│ get = St(fun)
+

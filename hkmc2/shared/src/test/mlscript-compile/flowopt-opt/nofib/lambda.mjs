@@ -49,17 +49,17 @@ main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval$la
   let f, lambda$here, m, f1, inlinedVal, lambda$here1;
   m = lambda9.myGet;
   f1 = lambda$2(lambda9, x);
-  lambda$here1 = main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval_lambda$$lambda$2(lambda9, m, f1);
+  lambda$here1 = lambda$(lambda9, m, f1);
   inlinedVal = lambda9.MyState(lambda$here1);
   f = main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval$lambda$(lambda9);
-  lambda$here = main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval_lambda$$lambda$2(lambda9, inlinedVal, f);
+  lambda$here = lambda$(lambda9, inlinedVal, f);
   return lambda9.MyState(lambda$here)
 };
 main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval$lambda2 = function main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval$lambda(lambda9, v, u_) {
   let inlinedVal, f, lambda$here;
   inlinedVal = main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval$traverseTerm_traverseCon_eval(1, v);
   f = lambda$5(lambda9, u_);
-  lambda$here = main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval_lambda$$lambda$2(lambda9, inlinedVal, f);
+  lambda$here = lambda$(lambda9, inlinedVal, f);
   return lambda9.MyState(lambda$here)
 };
 main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval$lambda = function main_testLambda_nofib_mainMonad_ev_traverseTerm_traverseTerm_traverseCon_eval$lambda(lambda9, a, b, vall) {

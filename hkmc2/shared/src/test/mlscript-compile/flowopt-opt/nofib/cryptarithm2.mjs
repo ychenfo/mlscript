@@ -151,10 +151,10 @@ main_testCryptarithm2_nofib_puzzle_solve$lambda1 = function main_testCryptarithm
   let f, lambda$here, m, f1, inlinedVal, lambda$here1;
   m = cryptarithm22.get;
   f1 = main_testCryptarithm2_nofib_puzzle_solve_lambda$$lambda$(cryptarithm22, bot);
-  lambda$here1 = main_testCryptarithm2_nofib_puzzle_solve_lambda$$lambda$1(cryptarithm22, m, f1);
+  lambda$here1 = lambda$2(cryptarithm22, m, f1);
   inlinedVal = cryptarithm22.StateT(lambda$here1);
   f = main_testCryptarithm2_nofib_puzzle_solve$lambda$2(cryptarithm22, tops, botss, topN);
-  lambda$here = main_testCryptarithm2_nofib_puzzle_solve_lambda$$lambda$1(cryptarithm22, inlinedVal, f);
+  lambda$here = lambda$2(cryptarithm22, inlinedVal, f);
   return cryptarithm22.StateT(lambda$here)
 };
 main_testCryptarithm2_nofib_puzzle_solve$lambda$1 = function main_testCryptarithm2_nofib_puzzle_solve$lambda$(cryptarithm22, tops, bot, botss) {
@@ -550,7 +550,6 @@ main_testCryptarithm2_nofib_puzzle_solve_select_lambda$_lambda_lambda$$lambda$1 
 main_testCryptarithm2_nofib_puzzle_solve_lambda$_lambda_lambda$_lambda$lambda2 = function main_testCryptarithm2_nofib_puzzle_solve_lambda$_lambda_lambda$_lambda$lambda(cryptarithm22, f, caseScrut) {
   let element1$, tmp;
   if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
-    runtime.Tuple.get(caseScrut, 0);
     element1$ = runtime.Tuple.get(caseScrut, 1);
     tmp = runtime.safeCall(f());
     if (tmp instanceof cryptarithm22.StateT.class) {
