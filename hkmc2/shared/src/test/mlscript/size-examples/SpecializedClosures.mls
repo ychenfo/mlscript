@@ -1,0 +1,122 @@
+:js
+
+
+// * a closure-returning helper with two kinds of uses: one applies the closure right away,
+// * the other passes it on and calls it twice; mono must keep returning the closure for both uses,
+// * poly eta-expands the first use's copy (see the eta-expansion log), which then needs no closure
+
+
+:soir
+:flowBasedOpt mono debugEta
+private fun mk(n) =
+  let a = n * 2 + n * 3 + n * 4
+  x => x * a + x * n + a * n
+private fun twice(h, x) = h(h(x))
+fun main(y) = [mk(y)(1), twice(mk(y + 1), 3)]
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define mk⁰ as fun mk¹(n) {
+//│   let a, tmp, tmp1, tmp2, tmp3, lambda;
+//│   set tmp = *⁰(n, 2);
+//│   set tmp1 = *⁰(n, 3);
+//│   set tmp2 = +⁰(tmp, tmp1);
+//│   set tmp3 = *⁰(n, 4);
+//│   set a = +⁰(tmp2, tmp3);
+//│   @private
+//│   define lambda as fun lambda⁰(x) {
+//│     let tmp4, tmp5, tmp6, tmp7;
+//│     set tmp4 = *⁰(x, a);
+//│     set tmp5 = *⁰(x, n);
+//│     set tmp6 = +⁰(tmp4, tmp5);
+//│     set tmp7 = *⁰(a, n);
+//│     return +⁰(tmp6, tmp7)
+//│   };
+//│   return lambda⁰
+//│ };
+//│ @private
+//│ define twice⁰ as fun twice¹(h, x) {
+//│   let tmp;
+//│   set tmp = h(x);
+//│   return h(tmp)
+//│ };
+//│ define main⁰ as fun main¹(y) {
+//│   let baseCall, tmp, tmp1, tmp2, inlinedVal, tmp3;
+//│   set baseCall = mk¹(y);
+//│   set tmp = baseCall(1);
+//│   set tmp1 = +⁰(y, 1);
+//│   set tmp2 = mk¹(tmp1);
+//│   set tmp3 = tmp2(3);
+//│   set inlinedVal = tmp2(tmp3);
+//│   return [tmp, inlinedVal]
+//│ };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+:expect [19, 1956]
+main(1)
+//│ = [19, 1956]
+
+
+:soir
+:flowBasedOpt poly debugEta
+private fun mk(n) =
+  let a = n * 2 + n * 3 + n * 4
+  x => x * a + x * n + a * n
+private fun twice(h, x) = h(h(x))
+fun main(y) = [mk(y)(1), twice(mk(y + 1), 3)]
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > mk²#0 @ main².mk³: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define mk² as fun mk³(n) {
+//│   let a, tmp, tmp1, tmp2, tmp3, lambda;
+//│   set tmp = *⁰(n, 2);
+//│   set tmp1 = *⁰(n, 3);
+//│   set tmp2 = +⁰(tmp, tmp1);
+//│   set tmp3 = *⁰(n, 4);
+//│   set a = +⁰(tmp2, tmp3);
+//│   @private
+//│   define lambda as fun lambda¹(x) {
+//│     let tmp4, tmp5, tmp6, tmp7;
+//│     set tmp4 = *⁰(x, a);
+//│     set tmp5 = *⁰(x, n);
+//│     set tmp6 = +⁰(tmp4, tmp5);
+//│     set tmp7 = *⁰(a, n);
+//│     return +⁰(tmp6, tmp7)
+//│   };
+//│   return lambda¹
+//│ };
+//│ @private
+//│ define twice² as fun twice³(h, x) {
+//│   let tmp;
+//│   set tmp = h(x);
+//│   return h(tmp)
+//│ };
+//│ define main² as fun main³(y) {
+//│   let tmp, tmp1, inlinedVal, tmp2, inlinedVal1, a, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+//│   set tmp3 = *⁰(y, 2);
+//│   set tmp4 = *⁰(y, 3);
+//│   set tmp5 = +⁰(tmp3, tmp4);
+//│   set tmp6 = *⁰(y, 4);
+//│   set a = +⁰(tmp5, tmp6);
+//│   set tmp7 = *⁰(1, a);
+//│   set tmp8 = *⁰(1, y);
+//│   set tmp9 = +⁰(tmp7, tmp8);
+//│   set tmp10 = *⁰(a, y);
+//│   set inlinedVal1 = +⁰(tmp9, tmp10);
+//│   set tmp = +⁰(y, 1);
+//│   set tmp1 = mk³(tmp);
+//│   set tmp2 = tmp1(3);
+//│   set inlinedVal = tmp1(tmp2);
+//│   return [inlinedVal1, inlinedVal]
+//│ };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+:expect [19, 1956]
+main(1)
+//│ = [19, 1956]
+

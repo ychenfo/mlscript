@@ -1,0 +1,139 @@
+:js
+
+
+// * a helper shared by two call sites, each passing a different known constructor:
+// * mono keeps one `apply` with both used branches, called twice; poly gives each call site its own copy,
+// * in which only one branch is reachable, and each single-use copy is inlined into `main`
+// * (the unspecialized `apply` stays defined below only because diff tests preserve unused private
+// * definitions; the benchmark setup, `preservePrivateAbi = false`, drops it)
+data class Mul(k)
+data class Div(k)
+data class Sub(k)
+
+
+:soir
+:flowBasedOpt mono
+private fun apply(op, x) = if op is
+  Mul(k) then x * k + x * k * 2 + x * k * 3
+  Div(k) then x / k + x / (k * 2) + x / (k * 3)
+  Sub(k) then x - k - k * 2 - k * 3
+fun main(x) = [apply(Mul(2), x), apply(Sub(1), x)]
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define apply⁰ as fun apply¹(op, x) {
+//│   let arg$Sub$0$, arg$Mul$0$, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
+//│   match op
+//│     Mul⁰ =>
+//│       set arg$Mul$0$ = op.k⁰;
+//│       set tmp = *⁰(x, arg$Mul$0$);
+//│       set tmp1 = *⁰(x, arg$Mul$0$);
+//│       set tmp2 = *⁰(tmp1, 2);
+//│       set tmp3 = +⁰(tmp, tmp2);
+//│       set tmp4 = *⁰(x, arg$Mul$0$);
+//│       set tmp5 = *⁰(tmp4, 3);
+//│       return +⁰(tmp3, tmp5)
+//│     Sub⁰ =>
+//│       set arg$Sub$0$ = op.k¹;
+//│       set tmp6 = -⁰(x, arg$Sub$0$);
+//│       set tmp7 = *⁰(arg$Sub$0$, 2);
+//│       set tmp8 = -⁰(tmp6, tmp7);
+//│       set tmp9 = *⁰(arg$Sub$0$, 3);
+//│       return -⁰(tmp8, tmp9)
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ define main⁰ as fun main¹(x) {
+//│   let tmp, tmp1, tmp2, tmp3;
+//│   set tmp = Mul¹(2);
+//│   set tmp1 = apply¹(tmp, x);
+//│   set tmp2 = Sub¹(1);
+//│   set tmp3 = apply¹(tmp2, x);
+//│   return [tmp1, tmp3]
+//│ };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+:expect [60, -1]
+main(5)
+//│ = [60, -1]
+
+
+:soir
+:flowBasedOpt poly
+private fun apply(op, x) = if op is
+  Mul(k) then x * k + x * k * 2 + x * k * 3
+  Div(k) then x / k + x / (k * 2) + x / (k * 3)
+  Sub(k) then x - k - k * 2 - k * 3
+fun main(x) = [apply(Mul(2), x), apply(Sub(1), x)]
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define apply² as fun apply³(op, x) {
+//│   let arg$Sub$0$, arg$Div$0$, arg$Mul$0$, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+//│   match op
+//│     Mul⁰ =>
+//│       set arg$Mul$0$ = op.k⁰;
+//│       set tmp = *⁰(x, arg$Mul$0$);
+//│       set tmp1 = *⁰(x, arg$Mul$0$);
+//│       set tmp2 = *⁰(tmp1, 2);
+//│       set tmp3 = +⁰(tmp, tmp2);
+//│       set tmp4 = *⁰(x, arg$Mul$0$);
+//│       set tmp5 = *⁰(tmp4, 3);
+//│       return +⁰(tmp3, tmp5)
+//│     Div⁰ =>
+//│       set arg$Div$0$ = op.k²;
+//│       set tmp6 = /⁰(x, arg$Div$0$);
+//│       set tmp7 = *⁰(arg$Div$0$, 2);
+//│       set tmp8 = /⁰(x, tmp7);
+//│       set tmp9 = +⁰(tmp6, tmp8);
+//│       set tmp10 = *⁰(arg$Div$0$, 3);
+//│       set tmp11 = /⁰(x, tmp10);
+//│       return +⁰(tmp9, tmp11)
+//│     Sub⁰ =>
+//│       set arg$Sub$0$ = op.k¹;
+//│       set tmp12 = -⁰(x, arg$Sub$0$);
+//│       set tmp13 = *⁰(arg$Sub$0$, 2);
+//│       set tmp14 = -⁰(tmp12, tmp13);
+//│       set tmp15 = *⁰(arg$Sub$0$, 3);
+//│       return -⁰(tmp14, tmp15)
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ define main² as fun main³(x) {
+//│   let tmp, tmp1, inlinedVal, inlinedVal1, arg$Sub$0$, tmp2, tmp3, tmp4, tmp5, arg$Mul$0$, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11;
+//│   set tmp = Mul¹(2);
+//│   match tmp
+//│     Mul⁰ =>
+//│       set arg$Mul$0$ = tmp.k⁰;
+//│       set tmp6 = *⁰(x, arg$Mul$0$);
+//│       set tmp7 = *⁰(x, arg$Mul$0$);
+//│       set tmp8 = *⁰(tmp7, 2);
+//│       set tmp9 = +⁰(tmp6, tmp8);
+//│       set tmp10 = *⁰(x, arg$Mul$0$);
+//│       set tmp11 = *⁰(tmp10, 3);
+//│       set inlinedVal = +⁰(tmp9, tmp11);
+//│       set tmp1 = Sub¹(1);
+//│       match tmp1
+//│         Sub⁰ =>
+//│           set arg$Sub$0$ = tmp1.k¹;
+//│           set tmp2 = -⁰(x, arg$Sub$0$);
+//│           set tmp3 = *⁰(arg$Sub$0$, 2);
+//│           set tmp4 = -⁰(tmp2, tmp3);
+//│           set tmp5 = *⁰(arg$Sub$0$, 3);
+//│           set inlinedVal1 = -⁰(tmp4, tmp5);
+//│           return [inlinedVal, inlinedVal1]
+//│         else
+//│           throw new globalThis⁰.Error⁰("match error")
+//│       end
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+:expect [60, -1]
+main(5)
+//│ = [60, -1]
+
