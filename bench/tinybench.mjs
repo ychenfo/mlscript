@@ -42,6 +42,8 @@ flags:
                        a broken module fails before anything is timed
   --sizes              print byte sizes instead of timing: per variant, the raw module, its unmin and its min terser
                        outputs, each plain and gzipped (level 9); --forms, --time and --min-samples are ignored
+  --no-freeze          replace Object.freeze with the identity before loading the programs, so that the compiled code
+                       stays the same but data-class instances and tuples are no longer frozen at run time
   --help               print this message
 
 programs that read input files (nofib/rsa, nofib/sorting, nofib/treejoin) get their contents as main(...) arguments,
@@ -61,7 +63,7 @@ examples:
 
 // `--flag value` for the flags with values, `--flag` for the others
 const valueFlags = ["variants", "filter", "forms", "time", "min-samples"]
-const booleanFlags = ["sizes", "help"]
+const booleanFlags = ["sizes", "no-freeze", "help"]
 const args = {}
 const argv = process.argv.slice(2)
 for (let i = 0; i < argv.length; i++) {
@@ -97,12 +99,17 @@ const filter = args.filter?.split(",")
 const time = numberFlag("time", 1000)
 const minSamples = numberFlag("min-samples", 10)
 const sizes = args.sizes === true
+const noFreeze = args["no-freeze"] === true
+// the compiled code calls `globalThis.Object.freeze` at each allocation, so this reaches every program and library
+// module, all of which are imported below; recompiling with `noFreeze` instead would also change what the flow
+// analysis may assume about the fields of the allocated objects, and with it the optimized code
+if (noFreeze) Object.freeze = x => x
 
 // without `concurrency: "task"`, tinybench samples a task until both `time` ms and `iterations` samples are reached
 // (`iterations` is a floor, not a cap): a slow program stops right after `minSamples`, a fast one runs for `time` ms
 // the same rule with `warmupTime: 0` makes exactly `warmupIterations` warmup calls
 const benchOptions = { time, iterations: minSamples, warmupTime: 0, warmupIterations: Math.ceil(minSamples / 4) }
-const benchDescription = `at least ${time} ms and ${minSamples} samples each`
+const benchDescription = `at least ${time} ms and ${minSamples} samples each${noFreeze ? ", Object.freeze disabled" : ""}`
 
 // a program is `group/name`, e.g. `eff/fft`; its compiled module is `flowopt-<variant>/<group>/<name>.mjs`
 const groups = ["eff", "nofib"]

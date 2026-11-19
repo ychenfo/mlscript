@@ -14,81 +14,38 @@ programs this moves no geometric mean by more than about 1 point.
 
 The benchmarks are 36 programs: 12 SML programs **[TODO cite]** and 24 from nofib **[TODO cite]**. Code size is the minified and gzipped JavaScript output. Running time is the mean time of one run of the same minified code on Node.js **[TODO version, machine]**, over at least 3 s and 20 runs per program.
 
-We now discuss the results for two kinds of input:
+We now discuss the results for the two kinds of input.
 
-**Result**
-The result of the runtime for each of the comparison is in @figures/time.pdf \TODO{make it in the paper},
-and \TODO{explain} how to read the picture.
-"none (pink), opt (lime) | none (pink), popt (yellow) | dnone (green), dopt (orange) | dnone (green), dpopt (blue)"
-The result of the size of each pair of comparison is in @figures/size.pdf \TODO{make it in the paper},
-and \TODO{explain} how to read the picture.
-
+**Results.**
+The running times for each comparison are in @figures/time.pdf \TODO{make it in the paper}. Each panel shows one program with four pairs of bars, from left to right: `none` (pink) and `opt` (lime); `none` (pink) and `popt` (yellow); `dnone` (green) and `dopt` (orange); `dnone` (green) and `dpopt` (blue). Each pair is normalized to its first bar, the input of the optimization, and drawn on its own scale, so the taller bar of a pair nearly reaches the top of the panel and heights can only be compared within a pair. A second bar lower than the first means that the optimization made the program faster.
+The code sizes for each comparison are in @figures/size.pdf \TODO{make it in the paper}, which is laid out the same way; there, a second bar lower than the first means that the optimization made the program smaller.
 
 
 **Programs as written.**
-On hand-written programs,
-state the numbers for `opt vs none`: geomean time change, geomean size change, and then say a modest average improvement is expected: the baseline already inlines and simplifies, and hand-written programs contain little dead code.
-state the numbers for `popt vs none`: TODO: find somethign to say, compare with none! not opt!
+On hand-written programs, `opt` makes programs 3% faster and 0.7% smaller than `none` in geometric mean. This modest average improvement is expected: the baseline already inlines and simplifies, and hand-written programs contain little dead code.
+`popt` makes programs 5% faster than `none` in geometric mean at the cost of 8.5% larger code.
 
 **After deforestation.**
-On deforested programs,
-state the numbers for `dopt vs dnone`: `dopt` is smaller than `dnone` on 31 of the 36 programs, by up to 32%, and 1.04× faster in geometric mean; seven programs run at least 5% faster. Deforestation leaves behind code that the baseline's clean-up passes cannot remove:
-  - parameters threaded through the fused functions that are dead at some or all call sites;
+On deforested programs, `dopt` is 3.2% smaller than `dnone` in geometric mean and smaller on 31 of the 36 programs, by up to 32%; it is also 4% faster in geometric mean, and seven programs run at least 5% faster. Deforestation leaves behind code that the baseline's clean-up passes cannot remove:
+  - dead parameters threaded through the fused functions that cannot be detected intraprocedurally;
   - closures that are created only to be applied once.
-The largest speedup, 1.85× on gcd for both `dopt` and `dpopt`, comes from an interplay with later passes. After deforestation, the program's recursive computation calls itself through closures. Our optimization eta-expands them, which lets the worker/wrapper transformation and the tail-recursion optimization later in the pipeline turn the recursion into a loop, making the hot path much faster. Our optimization is therefore a natural companion to aggressive transformations like deforestation: it performs a sound clean up after them without costing performance, and it enables further optimizations on their output.
 
-state the numbers for `dpopt vs dnone`: TODO: find something to say.
+The largest speedup is 1.85× on gcd for `dopt` vs `dnone`. It comes from an interplay with later passes. After deforestation, the program's recursive computation calls itself through closures that are nested inside branches. And it is eta-expansion that lets the worker/wrapper transformation and the tail-recursion optimization later in the pipeline turn the recursion into a loop, making the hot path much faster. Our optimization is therefore a natural companion to aggressive transformations like deforestation: it performs a sound clean-up after them without costing performance, and it enables further optimizations on their output.
 
 
-Now we give more comments on the polyvariance:
-firstly, we notice that the polyvariance speicalization does not always grows the code,
-
-In 5 programs, the polyvariant output is *smaller*, by up to 6% (TODO: what are those number? which compares to which????).
-This is less surprising than it may seem: lambda set specialization **[TODO cite: Brandon et al., PLDI 2023]** also creates specialized copies,
-and also report code size reduce, and the specialized copies enables further simplification:
+Now we give more comments on polyvariance.
+Firstly, we notice that polyvariant specialization does not always grow the code: `popt` is *smaller* than `none` on 5 programs, by up to 8%, and `dpopt` is smaller than `dnone` on 12 programs, by up to 38%.
+This is less surprising than it may seem: lambda set specialization **[TODO cite: Brandon et al., PLDI 2023]** also creates specialized copies and also reports code size reductions, and the specialized copies enable further simplification:
 - **More removal per copy:** each copy sees only the values that reach its own call sites, so dead-code elimination removes more from it than from a shared version.
 - **Cheaper inlining:** a copy with a single call site is inlined and simplified in context, while a shared helper may not get inlined at all.
 
-So with these effects compound, they outweigh the duplication. Most actual size reductions still come from the monovariant optimization: of the 12 programs where `dpopt` is smaller than `dnone`, 85% of the reduction is already achieved by `dopt`.
+When these effects compound, they may outweigh the duplication.
 
-However, this doesn't mean that we should apply polyvariant speicalization blindly:
-Applied after deforestation, the polyvariant analysis makes code 12% larger (TODO: is it dpopt vs dnone? check and never report numbers of dpopt and dopt, and similarly never popt vs opt, always compare to none/dnone for clarity) than the monovariant one but no faster, one program (spehere) becomes 2.6× larger at the same speed.
+However, this does not mean that we should apply polyvariant specialization blindly.
+`dpopt` is as fast as `dopt`, 4% faster than `dnone` in geometric mean, but its code is 8.5% larger than `dnone`'s, whereas `dopt`'s is 3.2% smaller.
+Applied after deforestation, the polyvariant analysis makes code 8.5% larger than `dnone`, while the monovariant one makes it 3.2% smaller, and the two are equally fast (1.04×). One program (sphere) becomes 2.5× larger than `dnone` at about the same speed.
 So a lesson we learned here is that a single polyvariant expansion per pipeline mostly suffices.
-Moreover, it is also possible to mix poly and mono for different top level definitions,
-and then this flexibility also opens more room for improvements via fine tune heuristics.
+We also comment that our design allows mix poly and mono for different top-level definitions,
+and this flexibility opens more room for improvements via fine-tuned heuristics, which we leave as a future work.
 
 
-
----
-
-**Table 1.** Our optimization relative to its input, geometric means over 36 programs. Size is minified and gzipped.
-
-| configuration | compared with | code size | programs smaller | speedup | programs faster / slower | max slowdown |
-|---|---|---:|---:|---:|---:|---:|
-| `opt` | `none` | 0.993 | 26 | 1.033× | 26 / 10 | 1.8% |
-| `popt` | `none` | 1.085 | 5 | 1.051× | 29 / 7 | 3.0% |
-| `dopt` | `dnone` | 0.968 | 31 | 1.039× | 27 / 9 | 6.5% |
-| `dpopt` | `dnone` | 1.085 | 12 | 1.039× | 25 / 11 | 3.8% |
-
-**Table 2.** Polyvariant relative to monovariant.
-
-| input | comparison | code size | programs smaller | speedup | max slowdown |
-|---|---|---:|---:|---:|---:|
-| programs as written | `popt` vs `opt` | 1.093 | 5 | 1.018× | 4.3% |
-| after deforestation | `dpopt` vs `dopt` | 1.120 | 5 | 1.000× | 13.4% |
-
-**Table 3.** The individual cases cited in the text.
-
-| case | comparison | code size | speedup |
-|---|---|---:|---:|
-| largest reduction by our optimization | integer, `dopt` vs `dnone` | 0.68 | 1.28× |
-| largest shrink from polyvariance | pretty, `popt` vs `opt` | 0.94 | 1.01× |
-| worst case of polyvariance twice | sphere, `dpopt` vs `dopt` | 2.56 | 1.01× |
-
-**Figures to make:**
-- **[FIG 1] Size–speed plane, two panels.**
-  - Left panel: the programs as written, relative to `none`. Right panel: after deforestation, relative to `dnone`.
-  - Axes: x is code size, y is speedup, both relative to the panel's input.
-  - Marks: per program, an arrow from the monovariant point to the polyvariant one (`opt` → `popt` on the left, `dopt` → `dpopt` on the right).
-  - What it should show: the monovariant points sit at or left of 1 and mostly above 1. The arrows point right; on the right panel they stay level (bigger, not faster).
-- **[FIG 2] Per-program speedup bars.** The four configurations, each relative to its own input, no error bars.
